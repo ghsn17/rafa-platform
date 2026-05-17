@@ -3,307 +3,973 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة رأفة الوطنية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <title>منصة مبادرة رأفة الخيرية v10.0</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        :root { --p: #123e1a; --bg: #f4f7f4; --c: #fff; --t: #2d3748; --sub: #718096; }
-        [data-theme="dark"] { --bg: #0b1a0e; --c: #122617; --t: #f7fafc; }
-        body { font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--t); margin:0; padding-bottom:30px; }
-        .nav { background: var(--p); color: #fff; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
-        .btn-v { background: #ecc94b; border:0; padding: 6px 12px; border-radius: 20px; font-family:'Cairo'; font-size:11px; font-weight:bold; cursor:pointer; }
-        .container { max-width: 480px; margin: 0 auto; padding: 10px; }
-        .stats { background: var(--c); border-radius: 12px; padding: 12px; display: flex; justify-content: space-around; text-align: center; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 15px; }
-        .stat-num { color: #ecc94b; font-size: 16px; font-weight: bold; }
+        :root { 
+            --primary: #47604f;      
+            --primary-dark: #2e3f34; 
+            --accent: #d4b235;       
+            --bg-light: #f3f5f7;     
+            --card-bg: #ffffff;      
+            --card-sub-bg: #f8fafb;  
+            --text-main: #1e293b;    
+            --text-sub: #4d5e75;
+            --gradient-bar: linear-gradient(90deg, #d4b235, #47604f);
+            --border-color: #e2e8f0; 
+        }
         
-        /* تحديث الكرت ليتناسب مع الصورة */
-        .card { background: var(--c); border-radius: 16px; border: 1px solid rgba(0,0,0,0.05); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); overflow: hidden; }
-        .card-body { padding: 15px; }
-        
-        /* نمط صورة الحالة الفخم */
-        .case-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid rgba(0,0,0,0.05); display: block; }
-        
-        .flex { display: flex; justify-content: space-between; align-items: center; }
-        .badge { background: #fff5f5; color: #e53e3e; padding: 3px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; }
-        .imp { background: rgba(236,201,75,0.1); border-right: 3px solid #ecc94b; padding: 8px; font-size: 11px; margin: 10px 0; border-radius: 0 4px 4px 0; }
-        
-        .case-quick-donate { background: linear-gradient(135deg, var(--p), #0b2911); color: #fff; border-radius: 12px; padding: 12px; margin: 12px 0; display: flex; flex-direction: column; align-items: center; }
-        .q-btns { display: flex; gap: 6px; width: 100%; margin: 8px 0; }
-        .q-btn { flex: 1; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 6px; border-radius: 6px; cursor: pointer; font-family: 'Cairo'; font-size: 11px; font-weight: bold; }
-        .q-btn.active, .q-btn:hover { background: #fff; color: var(--p); }
-        .q-in { width: 100%; padding: 8px; border-radius: 6px; border: none; text-align: center; font-family: 'Cairo'; font-size: 11px; margin-bottom: 8px; box-sizing: border-box; }
-        
-        /* نمط واجهة الإهداء الذكية داخل كرت التبرع */
-        .gift-section { width: 100%; text-align: right; margin-bottom: 10px; display: none; background: rgba(255,255,255,0.08); padding: 8px; border-radius: 6px; box-sizing: border-box; }
-        .gift-label { font-size: 11px; color: #ecc94b; font-weight: bold; display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .gift-fields { display: none; margin-top: 8px; gap: 6px; flex-direction: column; width: 100%; }
-        .gift-in { width: 100%; padding: 6px; border-radius: 4px; border: none; font-family: 'Cairo'; font-size: 11px; box-sizing: border-box; }
+        [data-theme="dark"] { 
+            --bg-light: #0f1712;     
+            --card-bg: #16241b;      
+            --card-sub-bg: #1c2e23;
+            --text-main: #f1f5f9;    
+            --text-sub: #94a3b8;     
+            --primary-dark: #d4b235; 
+            --primary: #47604f;      
+            --border-color: #233729;
+        }
 
-        .btn-submit { background: #cbd5e0; color: #718096; border:0; width:100%; padding: 10px; border-radius: 8px; font-family:'Cairo'; font-weight:bold; cursor: not-allowed; font-size: 13px; text-align: center; text-decoration: none; display: block; box-sizing: border-box; transition: 0.3s; }
-        .btn-submit.ready { background: #ecc94b; color: #1a202c; cursor: pointer; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: var(--bg-light); color: var(--text-main); padding-bottom: 90px; transition: background 0.3s; overflow-x: hidden; }
+        
+        .top-navbar { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: transparent; position: absolute; top: 0; width: 100%; z-index: 100; }
+        .btn-menu { background: var(--primary); color: white; border: none; width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.2s; }
+        .btn-menu:hover { background: var(--primary-dark); }
+        .top-navbar .page-indicator { font-size: 12px; font-weight: 700; color: var(--text-main); background: var(--card-bg); padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border-color); }
+        
+        .home-active .top-navbar .page-indicator { color: white; background: rgba(212, 178, 53, 0.2); border-color: rgba(255,255,255,0.2); }
+        .home-active .top-navbar .btn-menu { background: white; color: var(--primary); }
 
-        .ring-wrap { position: relative; width: 60px; height: 60px; }
-        .ring { transform: rotate(-90deg); transform-origin: 30px 30px; }
-        .ring-txt { position: absolute; top:50%; left:50%; transform: translate(-50%,-50%); font-weight:bold; font-size:12px; }
+        .app-page { display: none; padding: 20px 15px; max-width: 650px; margin: 0 auto; animation: pageFade 0.3s ease-in-out; }
+        .app-page.active { display: block; }
+        @keyframes pageFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .home-hero { 
+            background: var(--primary); border-radius: 0 0 35px 35px; padding: 75px 24px 45px; text-align: center; color: white; margin: -20px -15px 25px -15px; box-shadow: 0 10px 30px rgba(71, 96, 79, 0.15); 
+        }
+        .home-hero h1 { font-size: 28px; font-weight: 800; color: white; margin-bottom: 16px; }
+        .home-hero .prose-description { font-size: 14px; color: rgba(255, 255, 255, 0.92); line-height: 1.8; font-weight: 500; text-align: justify; max-width: 580px; margin: 0 auto; opacity: 0; animation: textFadeIn 1.4s ease-out forwards; animation-delay: 0.2s; }
+        @keyframes textFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
         
-        .bank { background: rgba(0,0,0,0.02); border: 1px dashed var(--sub); padding: 10px; border-radius: 8px; font-size: 11px; margin-top:12px; }
-        .btn-wa { background: #123e1a; color: #fff; border:1px solid rgba(255,255,255,0.1); width:100%; padding: 12px; border-radius: 10px; font-family:'Cairo'; font-weight:bold; margin-top: 10px; text-align:center; text-decoration:none; display:block; box-sizing: border-box; font-size: 13px; }
+        .welcome-content { max-width: 650px; margin: 0 auto; }
+        .hadith-card { background: var(--card-bg); padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.01); text-align: justify; line-height: 1.8; font-weight: 600; color: var(--text-main); border: 1px solid var(--border-color); border-right: 5px solid var(--primary); margin-bottom: 20px; }
+
+        .impact-tracker-banner { background: linear-gradient(135deg, rgba(212, 178, 53, 0.15) 0%, rgba(71, 96, 79, 0.08) 100%); border: 1px solid var(--accent); border-radius: 16px; padding: 14px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(214, 178, 53, 0.08); }
+        .impact-tracker-banner i { color: var(--accent); font-size: 24px; }
+        .impact-tracker-banner p { font-size: 13px; font-weight: 700; color: var(--text-main); line-height: 1.6; }
+
+        .luxury-card { background: var(--card-bg); border-radius: 24px; padding: 24px; box-shadow: 0 4px 18px rgba(0, 0, 0, 0.02); margin-bottom: 20px; border: 1px solid var(--border-color); position: relative; transition: all 0.3s ease; }
         
-        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); justify-content:center; align-items:center; z-index:100; }
-        .m-box { background: var(--c); padding: 20px; border-radius: 16px; width: 85%; max-width: 340px; }
-        input.v-input { width:100%; padding:10px; margin: 6px 0; border:1px solid #cbd5e0; border-radius:8px; box-sizing:border-box; font-family:'Cairo'; font-size:12px; background: var(--c); color: var(--t); }
+        .luxury-card.global-status-card { background: var(--primary) !important; color: white !important; border: none !important; box-shadow: 0 10px 25px rgba(71, 96, 79, 0.15); margin-top: 45px; }
+        .global-status-card .luxury-title, .global-status-card .stat-item-ui .value { color: white !important; }
+        .global-status-card .stat-item-ui .label { color: rgba(255,255,255,0.7) !important; }
+        .global-status-card .case-icon-circle { background: rgba(255,255,255,0.1) !important; color: var(--accent) !important; }
+        .global-status-card .luxury-bar-outer { background: rgba(255,255,255,0.15) !important; }
+        .global-status-card .families-badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: white !important; }
+
+        .card-header-ui { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .case-icon-wrapper { display: flex; align-items: center; gap: 10px; }
+        .case-icon-circle { width: 38px; height: 38px; border-radius: 12px; background: rgba(71, 96, 79, 0.08); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 16px; }
         
-        .admin-panel { background: var(--c); border: 2px solid var(--p); border-radius: 16px; padding: 15px; margin-top: 15px; display: none; }
-        .admin-trigger { background: none; border: none; color: var(--sub); font-size: 11px; cursor: pointer; margin: 25px auto 0 auto; display: block; font-family: 'Cairo'; }
-        .admin-tools { margin-top: 10px; border-top: 1px dashed var(--sub); padding-top: 8px; display: flex; gap: 5px; }
+        .case-badge-status { font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 30px; }
+        .case-badge-status.active { background: #fee2e2; color: #ef4444; }
+        .case-badge-status.completed { background: #d1fae5; color: #065f46; }
+
+        .luxury-title { font-size: 16px; font-weight: 700; color: var(--text-main); line-height: 1.6; margin-bottom: 20px; }
+
+        .progress-container-ui { margin-bottom: 20px; }
+        .progress-labels-ui { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+        .luxury-bar-outer { height: 7px; background: var(--bg-light); border-radius: 20px; overflow: hidden; position: relative; }
+        .luxury-bar-inner { height: 100%; background: var(--gradient-bar); width: 0%; border-radius: 20px; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+        
+        .stats-row-ui { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px dashed var(--border-color); margin-bottom: 20px; }
+        .stat-item-ui { display: flex; flex-direction: column; gap: 2px; }
+        .stat-item-ui .label { font-size: 11px; color: var(--text-sub); font-weight: 600; }
+        .stat-item-ui .value { font-size: 15px; font-weight: 800; color: var(--text-main); }
+
+        .btn-luxury-action { background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 14px; border: none; cursor: pointer; width: 100%; transition: background 0.2s; }
+        .btn-luxury-action:hover { background: var(--primary-dark); }
+
+        .shares-quick-group { display: flex; justify-content: center; gap: 6px; margin: 8px 0; flex-wrap: wrap; }
+        .btn-share-quick { min-width: 80px; flex: 1; background: var(--card-bg); border: 1px solid var(--border-color); padding: 6px 4px; border-radius: 10px; font-family: 'Cairo'; font-size: 10.5px; font-weight: 700; color: var(--text-main); cursor: pointer; transition: all 0.2s; text-align: center; }
+        .btn-share-quick:hover { border-color: var(--accent); background: rgba(212, 178, 53, 0.05); }
+
+        .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15, 23, 42, 0.6); backdrop-filter: blur(6px); justify-content:center; align-items:center; z-index:1200; padding: 15px; }
+        .modal-box { background: var(--card-bg); padding: 20px; border-radius: 24px; width: 100%; max-width: 440px; box-shadow: 0 25px 50px -12 rgba(0,0,0,0.25); max-height: 92vh; overflow-y: auto; border: 1px solid var(--border-color); animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes modalSlideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .donation-input-container { background: var(--card-sub-bg); padding: 10px 12px; border-radius: 14px; border: 1px solid var(--border-color); text-align: center; }
+        .donation-input-wrapper { position: relative; max-width: 200px; margin: 4px auto 0; }
+        .donation-input-wrapper input { width: 100%; padding: 6px 10px 6px 40px; border: 2px solid var(--border-color); border-radius: 10px; font-family: 'Cairo'; font-size: 15px; font-weight: 800; text-align: center; background: var(--card-bg); color: var(--text-main); }
+        .donation-input-wrapper input:focus { border-color: var(--primary); outline: none; }
+        .donation-input-wrapper .currency-badge { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-weight: 800; font-size: 12px; color: var(--text-sub); }
+
+        .bankak-digital-card { background: linear-gradient(135deg, #2e3f34 0%, #47604f 100%); color: white; padding: 12px 16px; border-radius: 14px; position: relative; overflow: hidden; margin-bottom: 12px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); }
+        .card-top-info { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .bankak-logo-text { font-size: 10px; font-weight: 800; background: rgba(255,255,255,0.15); padding: 2px 8px; border-radius: 5px; color: var(--accent); }
+        .card-number-display { font-size: 18px; font-weight: 800; text-align: center; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; }
+        .card-holder-layout { display: flex; justify-content: space-between; align-items: flex-end; }
+        .card-holder-title { font-size: 8px; color: rgba(255,255,255,0.6); margin-bottom: 2px; }
+        .card-holder-name { font-size: 12px; font-weight: 700; }
+
+        .notice-banner-alert { background: rgba(239, 68, 68, 0.06); border: 1px dashed #ef4444; border-radius: 12px; padding: 10px 12px; margin-bottom: 16px; display: flex; gap: 8px; }
+        .notice-banner-alert i { color: #ef4444; font-size: 13px; margin-top: 2px; }
+        .notice-banner-alert p { font-size: 11px; font-weight: 700; color: #b91c1c; line-height: 1.5; text-align: justify; }
+
+        .modal-actions-group { display: flex; flex-direction: column; gap: 8px; }
+
+        .toast-notice { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; color: #ffffff; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 2000; opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px; }
+        .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+        .admin-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+        .admin-tab-btn { background: transparent; color: var(--text-sub); border: none; padding: 8px 10px; font-family: 'Cairo'; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 8px; }
+        .admin-tab-btn.active { background: var(--primary); color: white; }
+
+        .admin-sub-page { display: none; }
+        .admin-sub-page.active { display: block; }
+
+        .admin-table-container { width: 100%; overflow-x: auto; margin-top: 10px; }
+        .admin-table { width: 100%; border-collapse: collapse; text-align: right; font-size: 13px; }
+        .admin-table th { background: rgba(71, 96, 79, 0.08); padding: 14px 10px; font-weight: 700; border-bottom: 2px solid var(--border-color); }
+        .admin-table td { padding: 16px 10px; border-bottom: 1px solid var(--border-color); }
+        
+        .btn-table-action { border: none; padding: 7px 12px; border-radius: 8px; font-family: 'Cairo'; font-weight: 700; font-size: 11px; cursor: pointer; }
+        .btn-table-action.edit { background: #e0f2fe; color: #0369a1; }
+        .btn-table-action.add-cash { background: #fef3c7; color: #b45309; margin-right: 2px; }
+        .btn-table-action.complete { background: #d1fae5; color: #065f46; }
+        .btn-table-action.delete { background: #fee2e2; color: #991b1b; }
+
+        .side-drawer { position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: var(--card-bg); box-shadow: -4px 0 20px rgba(0,0,0,0.08); z-index: 1100; transition: right 0.3s ease; padding: 25px 20px; }
+        .side-drawer.open { right: 0; }
+        .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1050; display: none; }
+        .drawer-overlay.open { display: block; }
+        
+        .drawer-accordion-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px; background: var(--card-sub-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-family: 'Cairo'; font-weight: 700; font-size: 14px; cursor: pointer; margin-bottom: 10px; }
+        .drawer-dropdown-content { display: none; flex-direction: column; gap: 6px; padding: 5px 10px 15px; }
+        .drawer-dropdown-content.show { display: flex; }
+
+        .amb-badge { background: var(--bg-light); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .social-link { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; color: var(--text-main); font-size: 13px; font-weight: 600; background: var(--bg-light); border: 1px solid var(--border-color); margin-bottom: 4px; }
+
+        .smart-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 12px 0; display: flex; justify-content: space-around; align-items: center; z-index: 900; }
+        .footer-item { display: flex; flex-direction: column; align-items: center; color: var(--text-sub); cursor: pointer; font-size: 11px; font-weight: 700; }
+        .footer-item.active { color: var(--primary); }
+        .footer-item i { font-size: 18px; margin-bottom: 3px; }
+        
+        .v-input, .v-select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid var(--border-color); border-radius: 12px; font-family: 'Cairo'; font-size: 13px; background: var(--card-bg); color: var(--text-main); }
+        .btn-action { background: var(--primary); color: white; border: 0; padding: 10px 20px; border-radius: 12px; font-family: 'Cairo'; font-weight: 700; cursor: pointer; font-size: 13px; }
+        .admin-amb-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg-light); padding: 8px 12px; border-radius: 8px; margin-top: 5px; font-size: 12px; }
+
+        .section-header-title { font-size: 15px; font-weight: 800; color: var(--primary); margin: 25px 4px 12px 4px; display: flex; align-items: center; gap: 8px; border-right: 4px solid var(--accent); padding-right: 8px; }
     </style>
 </head>
-<body>
+<body class="home-active" id="body-wrapper">
 
-    <div class="nav">
-        <strong>منصة رأفة الخيرية</strong>
-        <div style="display: flex; gap: 8px;">
-            <button class="btn-v" onclick="openM()">🤝 تطوع معنا</button>
-            <button class="btn-v" style="background:rgba(255,255,255,0.2); color:#fff; padding: 6px 10px;" onclick="toggleT()">🌙</button>
-        </div>
+    <div id="toastNotice" class="toast-notice"><i class="fa-solid fa-circle-check" style="color:var(--accent); font-size:16px;"></i> <span id="toastMessage"></span></div>
+
+    <div class="top-navbar">
+        <button class="btn-menu" onclick="toggleDrawer(true)"><i class="fa-solid fa-bars"></i></button>
+        <div class="page-indicator" id="page-title-indicator">الرئيسية</div>
     </div>
 
-    <div class="container">
+    <div class="drawer-overlay" id="drawerOverlay" onclick="toggleDrawer(false)"></div>
+
+    <div class="side-drawer" id="sideDrawer">
+        <div style="text-align: left; margin-bottom: 20px;">
+            <button class="btn-menu" style="background:#ef4444; width:32px; height:32px; color:white;" onclick="toggleDrawer(false)"><i class="fa-solid fa-xmark"></i></button>
+        </div>
         
-        <div class="stats">
-            <div><div class="stat-num" id="totalStatsDisplay">٣٢٥,٠٠٠ ج</div><div style="font-size:11px; color:var(--sub);">إجمالي التبرعات الحالية</div></div>
-            <div><div class="stat-num" id="completedCountDisplay">٠</div><div style="font-size:11px; color:var(--sub);">حالات اكتملت</div></div>
+        <button class="drawer-accordion-btn" onclick="toggleAmbassadorsDropdown()">
+            <span><i class="fa-solid fa-medal" style="color:var(--accent); margin-left:5px;"></i>لوحة سفراء الخير <small>المتطوعين</small></span>
+            <i class="fa-solid fa-chevron-down" id="dropdown-icon" style="font-size: 11px;"></i>
+        </button>
+        <div class="drawer-dropdown-content" id="ambassadors-dropdown"><div id="ambassadors-live-list"></div></div>
+        
+        <button class="drawer-accordion-btn" style="margin-top: 8px;" onclick="toggleContactDropdown()">
+            <span><i class="fa-solid fa-comments" style="color:var(--primary); margin-left:5px;"></i>تواصل معنا الآن</span>
+            <i class="fa-solid fa-chevron-down" id="contact-dropdown-icon" style="font-size: 11px;"></i>
+        </button>
+        <div class="drawer-dropdown-content" id="contact-dropdown">
+            <a href="https://wa.me/249904284874" target="_blank" class="social-link" style="margin-top: 5px;"><i class="fa-brands fa-whatsapp" style="color:#25d366; font-size:18px;"></i> الواتساب الرسمي للمبادرة</a>
+            <a href="https://www.facebook.com/share/1941knMQst/?mibextid=wwXIfr" target="_blank" class="social-link"><i class="fa-brands fa-facebook" style="color:#1877f2; font-size:18px;"></i> صفحة الفيسبوك الرسمية</a>
+            <a href="https://chat.whatsapp.com/E5kuD9faY9A9hP4ePIEM4s?mode=gi_t" target="_blank" class="social-link"><i class="fa-solid fa-users" style="color:var(--accent); font-size:16px;"></i> رابط مجتمع المبادرة الرسمي</a>
         </div>
-
-        <div id="cases-list"></div>
-
-        <div id="admin-panel" class="admin-panel">
-            <h3 style="margin-top:0; font-size:14px; color:var(--p);">🔐 لوحة الإشراف والمتابعة</h3>
-            <input type="text" id="newCaseTitle" class="v-input" placeholder="عنوان الحالة...">
-            <input type="text" id="newCaseImage" class="v-input" placeholder="رابط صورة الحالة (اختياري)...">
-            <input type="text" id="newCaseDesc" class="v-input" placeholder="وصف وتفاصيل الحالة الإنسانية...">
-            <input type="text" id="newCaseImpact" class="v-input" placeholder="أثر السهم المتوقع...">
-            <input type="number" id="newCaseTarget" class="v-input" placeholder="المبلغ المستهدف (جنيه)...">
-            <button class="btn-submit ready" onclick="createNewCase()">نشر الحالة فوراً</button>
-        </div>
-
-        <button class="admin-trigger" onclick="unlockAdmin()">🔐 دخول المشرفين</button>
     </div>
 
-    <div id="vModal" class="modal">
-        <div class="m-box">
-            <h3 style="margin-top:0; color:var(--p); font-size:14px;">🤝 انضمام سفراء الخير</h3>
-            <input type="text" id="vName" class="v-input" placeholder="الاسم الكامل...">
-            <input type="tel" id="vPhone" class="v-input" placeholder="رقم الهاتف...">
-            <a id="volWaLink" class="btn-submit" target="_blank" onclick="return sendVolWA()">إرسال الطلب ✨</a>
-            <button class="btn-submit ready" style="background:#e53e3e; color:#fff; margin-top:6px;" onclick="closeM()">إغلاق</button>
+    <div id="page-home" class="app-page active">
+        <div class="home-hero">
+            <h1>مبادرة رأفة الخيرية</h1>
+            <p class="prose-description">
+                انطلاقاً من قيم التكافل الاجتماعي والمسؤولية الإنسانية تأتي مبادرة رأفة الخيرية لتفتح باباً مأموناً من أبواب العون المباشر، متخصصةً في البحث والوصول إلى الأسر المتعففة بسد ثغرات حوائجهم من دواء وغذاء ورعاية شاملة بوضوح وشفافية مطلقة.
+            </p>
+        </div>
+        
+        <div class="welcome-content">
+            <div class="impact-tracker-banner" id="personal-impact-banner" style="display: none;">
+                <i class="fa-solid fa-star-and-crecent"></i>
+                <p id="personal-impact-text"></p>
+            </div>
+
+            <div class="hadith-card">
+                <i class="fa-solid fa-quote-right" style="color: var(--accent); font-size: 22px; display: block; margin-bottom: 10px;"></i>
+                عَنْ أَبِي هُرَيْرَةَ رَضِيَ اللَّهُ عَنْهُ، عَنِ النَّبِيِّ ﷺ قَالَ: <span style="font-weight: 700; color: var(--text-main);">"مَنْ نَفَّسَ عن مُؤْمِنٍ كُرْبَةً مِن كُرَبِ الدُّنْيَا، نَفَّسَ اللَّهُ عنْه كُرْبَةً مِن كُرَبِ يَوْمِ القِيَامَةِ..."</span> 
+                <span style="display:block; text-align:left; font-size:11px; color:var(--text-sub); margin-top:8px;">[صحيح مسلم]</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="page-cases" class="app-page">
+        <div class="luxury-card global-status-card">
+            <div class="card-header-ui">
+                <div class="case-icon-wrapper">
+                    <div class="case-icon-circle"><i class="fa-solid fa-chart-line"></i></div>
+                    <div style="font-weight: 700; font-size: 14px;">الموقف التراكمي العام للمبادرة</div>
+                </div>
+                <div id="global-pct-text" style="font-size: 14px; font-weight: 800; color: var(--accent);">0%</div>
+            </div>
+            <div class="progress-container-ui"><div class="luxury-bar-outer"><div class="luxury-bar-inner" id="global-live-bar"></div></div></div>
+            <div class="stats-row-ui">
+                <div class="stat-item-ui"><span class="label">المبالغ المستلمة</span><span class="value" id="global-collected-text">0 ج</span></div>
+                <div class="stat-item-ui" style="text-align: left;"><span class="label">المستهدف الكلي</span><span class="value" id="global-target-text">0 ج</span></div>
+            </div>
+            <div class="families-badge" style="padding: 12px; border-radius: 14px; text-align: center; font-size: 13px; font-weight: 700;" id="families-raised-count">
+                جاري تحميل الإحصائيات...
+            </div>
+        </div>
+
+        <div class="section-header-title"><i class="fa-solid fa-hourglass-half"></i> ملفات خيرية نشطة بحاجة لدعمكم</div>
+        <div id="cases-container"></div>
+
+        <div class="section-header-title" id="archive-section-title" style="display: none;"><i class="fa-solid fa-circle-check"></i> 🌿 حصاد رأفة (ملفات كُفلت بالكامل)</div>
+        <div id="cases-archive-container"></div>
+    </div>
+
+    <div id="page-admin" class="app-page">
+        <div class="luxury-card" style="margin-top: 35px;">
+            <div id="admin-lock-screen">
+                <div style="text-align: center; padding: 10px;">
+                    <i class="fa-solid fa-lock" style="font-size: 30px; color: var(--primary); margin-bottom: 10px;"></i>
+                    <h3 style="font-size: 15px; margin-bottom: 5px;">لوحة القيادة والمتابعة للمشرفين</h3>
+                    <input type="password" id="adminPassInput" class="v-input" style="text-align:center; max-width: 260px;" placeholder="أدخلي الرمز السري...">
+                    <button class="btn-action" onclick="checkAdminPassword()">فتح اللوحة</button>
+                </div>
+            </div>
+
+            <div id="admin-panel" style="display: none;">
+                <button class="btn-luxury-action" style="background: #15803d; border-radius: 14px; margin-bottom: 16px; font-size: 12px;" onclick="generateWhatsAppReportLive()">
+                    <i class="fa-regular fa-clipboard"></i> 📋 نسخ تقرير الموقف العام للقروبات
+                </button>
+
+                <div class="admin-tabs">
+                    <button class="admin-tab-btn active" id="tab-sub-view" onclick="switchAdminSubTab('view')">🗂️ إدارة الحالات</button>
+                    <button class="admin-tab-btn" id="tab-sub-add" onclick="switchAdminSubTab('add')">🚀 إضافة حالة</button>
+                    <button class="admin-tab-btn" id="tab-sub-users" onclick="switchAdminSubTab('users')">⚙️ الإحصائيات والمتطوعين</button>
+                </div>
+
+                <div id="admin-sub-page-view" class="admin-sub-page active">
+                    <div class="admin-table-container">
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>الملف الخيري</th>
+                                    <th>المجموع والهدف</th>
+                                    <th style="text-align: center;">التحكم</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-cases-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="admin-sub-page-add" class="admin-sub-page">
+                    <label style="font-size: 12px; font-weight: 700;">عنوان الملف الخيري الجديد:</label>
+                    <input type="text" id="newCaseTitle" class="v-input" placeholder="مثال: توفير كفالة صحية للأسر المحتاجة...">
+                    <label style="font-size: 12px; font-weight: 700;">المستهدف المالي الكلي:</label>
+                    <input type="number" id="newCaseTarget" class="v-input">
+                    <button class="btn-action" style="width: 100%;" onclick="addNewCaseLive()">🚀 نشر الحالة للجمهور</button>
+                </div>
+
+                <div id="admin-sub-page-users" class="admin-sub-page">
+                    
+                    <div style="background: var(--card-sub-bg); padding: 14px; border-radius: 16px; margin-bottom: 15px; border: 1px solid var(--border-color); border-right: 5px solid var(--accent);">
+                        <label style="font-size: 12px; font-weight: bold; color: var(--primary);">📊 التحكم بعبارة كفالة الأسر (البانر الرئيسي):</label>
+                        
+                        <div style="margin-top: 8px;">
+                            <label style="font-size: 11px; color: var(--text-sub);">الرقم الحالي للحالات المكفولة:</label>
+                            <input type="text" id="adminFamilyCustomCount" class="v-input" placeholder="مثال: 4 من 20">
+                        </div>
+
+                        <div style="margin-top: 4px;">
+                            <label style="font-size: 11px; color: var(--text-sub);">نص العبارة الدعائية بالكامل:</label>
+                            <input type="text" id="adminFamilyCustomText" class="v-input" placeholder="مثال: أسرة متعففة كُفلت بالكامل 👥">
+                        </div>
+                        
+                        <button class="btn-action" style="width: 100%; font-size:12px; margin-top:5px; background:var(--primary);" onclick="saveCustomFamilyConfigLive()">💾 حفظ وتحديث العبارة فوراً</button>
+                    </div>
+
+                    <div style="background: var(--card-sub-bg); padding: 12px; border-radius: 12px; margin-bottom: 15px; border: 1px solid var(--border-color);">
+                        <label style="font-size: 12px; font-weight: bold; color: var(--primary);">⚙️ التحكم بأزرار أسهم التبرع السريعة:</label>
+                        <div style="display: flex; gap: 4px; margin-top: 8px;">
+                            <input type="text" id="newShareName" class="v-input" style="margin:0; font-size:11px;" placeholder="اسم السهم (سهم دواء)">
+                            <input type="number" id="newShareAmt" class="v-input" style="margin:0; font-size:11px; max-width:90px;" placeholder="المبلغ">
+                            <button class="btn-action" style="padding: 4px 12px; font-size:11px;" onclick="addNewDonationShareLive()">إضافة</button>
+                        </div>
+                        <div id="admin-shares-control-list" style="margin-top: 10px; max-height: 120px; overflow-y: auto;"></div>
+                    </div>
+
+                    <div style="background: var(--card-sub-bg); padding: 12px; border-radius: 12px; border: 1px solid var(--border-color);">
+                        <label style="font-size: 12px; font-weight: 700;">إضافة سفير خير:</label>
+                        <div style="display: flex; gap: 5px; margin-top: 4px;">
+                            <input type="text" id="newAmbInput" class="v-input" style="margin:0;" placeholder="اسم السفير الفاضل...">
+                            <button class="btn-action" onclick="addAmbassadorLive()">إضافة</button>
+                        </div>
+                        <div id="admin-amb-delete-list" style="margin-top: 10px; max-height: 100px; overflow-y: auto;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="smart-footer">
+        <div class="footer-item active" id="tab-home" onclick="switchPageLive('home')"><i class="fa-solid fa-house"></i>الرئيسية</div>
+        <div class="footer-item" id="tab-cases" onclick="switchPageLive('cases')"><i class="fa-solid fa-heart-circle-check"></i>حالات التبرع</div>
+        <div class="footer-item" onclick="openVolunteerModal()"><i class="fa-solid fa-user-plus"></i>تطوع معنا</div>
+        <div class="footer-item" id="tab-admin" onclick="switchPageLive('admin')"><i class="fa-solid fa-user-gear"></i>الإدارة</div>
+        <div class="footer-item" onclick="toggleThemeLive()"><i class="fa-solid fa-circle-half-stroke"></i>السمة</div>
+    </div>
+
+    <div id="donationModal" class="modal">
+        <div class="modal-box">
+            <h3 style="font-size: 14px; margin-bottom: 12px; font-weight: 800; color: var(--primary); text-align: center;">تقديم مساهمة للملف</h3>
+            
+            <div class="donation-input-container">
+                <label style="font-size: 11px; font-weight: 700; color: var(--text-sub); display: block;">💸 كم تود التبرع والمساهمة به؟ (بالجنيه)</label>
+                
+                <div class="shares-quick-group" id="live-shares-buttons-container"></div>
+
+                <div class="donation-input-wrapper">
+                    <input type="number" id="userDonationAmount" placeholder="أدخل مبلغ تبرعك هنا...">
+                    <span class="currency-badge">جنيه</span>
+                </div>
+            </div>
+
+            <p style="font-size: 10.5px; font-weight: bold; color: var(--text-sub); margin: 10px 0 4px 0;">💳 بيانات التحويل (انقري على البطاقة للنسخ 📋):</p>
+            
+            <div class="bankak-digital-card" onclick="copyAccountToClipboardLive('5270255')">
+                <div class="card-top-info">
+                    <span style="font-weight: 800; font-size: 11px;"><i class="fa-solid fa-building-columns"></i> بنك الخرطوم</span>
+                    <span class="bankak-logo-text">بنكك Bankak</span>
+                </div>
+                <div class="card-number-display">5270255 <i class="fa-regular fa-copy" style="font-size: 13px; opacity: 0.8;"></i></div>
+                <div class="card-holder-layout">
+                    <div>
+                        <div class="card-holder-title">اسم المستفيد</div>
+                        <div class="card-holder-name">ميثاق عمر محمود</div>
+                    </div>
+                    <i class="fa-solid fa-rss" style="transform: rotate(90deg); font-size: 13px; opacity: 0.4;"></i>
+                </div>
+            </div>
+            
+            <div class="notice-banner-alert">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <p>تنبيه هام ومُلزم: يرجى ضرورة إرسال إشعار التحويل البنكي عبر الضغط على الزر الأخضر بالأسفل، لضمان مراجعة الحسابات وقيد المبلغ بالملف فوراً.</p>
+            </div>
+            
+            <div class="modal-actions-group">
+                <button class="btn-luxury-action" style="background: #25d366; border-radius: 12px; padding:11px; font-size:13px;" onclick="processDonationLive()"><i class="fa-solid fa-paper-plane"></i> إرسال إشعار المساهمة للواتساب الآن</button>
+                <button class="btn-luxury-action" style="background: #64748b; border-radius: 12px; padding: 10px; font-size:12px;" onclick="closeDonationModal()">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="thankYouModal" class="modal">
+        <div class="modal-box" style="text-align: center; padding: 25px 20px;">
+            <div style="width:50px; height:50px; background:rgba(214, 178, 53, 0.15); color:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto; font-size:22px;">
+                <i class="fa-solid fa-hands-praying"></i>
+            </div>
+            <h3 style="font-weight: 800; color: var(--primary); margin-bottom: 6px; font-size:15px;">تقبل الله طاعاتكم ومساهمتكم ✨</h3>
+            <p style="font-size: 12px; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px;">
+                "الدال على الخير كفاعله"؛ لقد فتحنا محادثة الواتساب لإرسال الإشعار. انقري على الزر أدناه لنسخ رابط المنصة مع نص منسق وجذاب لمشاركته فوراً مع الأهل والأصدقاء لدعم بقية الأسر المحتاجة.
+            </p>
+            <button class="btn-luxury-action" style="border-radius:12px;" onclick="copyAppUrlToShareLive()"><i class="fa-solid fa-share-nodes"></i> 🔗 نسخ رسالة المشاركة الجاهزة</button>
+            <button class="btn-luxury-action" style="background:transparent; color:var(--text-sub); border:1px solid var(--border-color); margin-top:8px; font-size:12px; border-radius:12px;" onclick="closeThankYouModal()">إغلاق النافذة</button>
+        </div>
+    </div>
+
+    <div id="editCaseModal" class="modal">
+        <div class="modal-box">
+            <h3 style="font-size: 15px; margin-bottom: 12px; font-weight: 800;"><i class="fa-solid fa-pen-to-square"></i> تعديل مبالغ الملف الخيري</h3>
+            <input type="hidden" id="editCaseIndex">
+            <label style="font-size: 12px; font-weight: 700;">المبلغ الحالي المجموع:</label>
+            <input type="number" id="editCaseRaised" class="v-input">
+            <label style="font-size: 12px; font-weight: 700; display:block; margin-top:8px;">المستهدف الكلي المطلوب:</label>
+            <input type="number" id="editCaseTarget" class="v-input">
+            <button class="btn-luxury-action" style="border-radius:12px;" onclick="saveCaseEditsLive()">💾 حفظ التعديلات والمبالغ</button>
+            <button class="btn-luxury-action" style="background:#64748b; margin-top:8px; border-radius:12px;" onclick="closeEditModal()">إلغاء</button>
+        </div>
+    </div>
+
+    <div id="quickCashModal" class="modal">
+        <div class="modal-box">
+            <h3 style="font-size: 15px; margin-bottom: 12px; font-weight: 800; color:var(--primary);"><i class="fa-solid fa-money-bill-wave"></i> إضافة تبرع جديد مستلم فوراً</h3>
+            <input type="hidden" id="quickCashCaseIndex">
+            <label style="font-size: 12px; font-weight: 700;" id="quickCashTitleLabel">اسم الحالة</label>
+            <input type="number" id="quickCashAmountInput" class="v-input" placeholder="ادخلي مبلغ الدعم المستلم (مثال: 5000)...">
+            <button class="btn-luxury-action" style="border-radius:12px; background:#10b981;" onclick="submitQuickCashLive()">💸 إدراج وتحديث تلقائي</button>
+            <button class="btn-luxury-action" style="background:#64748b; margin-top:8px; border-radius:12px;" onclick="closeQuickCashModal()">إلغاء</button>
+        </div>
+    </div>
+
+    <div id="volunteerModal" class="modal">
+        <div class="modal-box">
+            <h3 style="font-size: 16px; margin-bottom: 12px;"><i class="fa-solid fa-handshake"></i> انضمام سفراء الخير</h3>
+            <input type="text" id="vName" class="v-input" placeholder="ادخل الاسم ثلاثي...">
+            <select id="vGender" class="v-select"><option value="" disabled selected>اختر الجنس...</option><option value="أنثى">أنثى</option><option value="ذكر">ذكر</option></select>
+            <input type="tel" id="vPhone" class="v-input" placeholder="رقم الهاتف والواتساب...">
+            <button class="btn-luxury-action" style="border-radius:12px;" onclick="submitVolunteerLive()">إرسال طلب الانضمام ✨</button>
+            <button class="btn-luxury-action" style="background:#64748b; margin-top:5px; border-radius:12px;" onclick="closeVolunteerModal()">إغلاق</button>
         </div>
     </div>
 
     <script>
-        let selectedAmt = 0;
-        let isLogged = false;
-        let cases = [];
-        const adminPhone = "249904284874";
+        let casesData = [];
+        let ambassadorsData = [];
+        let donationSharesData = [];
+        let activeCaseIndexForDonation = null;
 
-        // إدراج صورة افتراضية للمبادرة الأولى لتبدو جميلة فوراً
+        // المتغيرات الديناميكية للعبارة التراكمية
+        let familyCustomCount = "4 من 20";
+        let familyCustomText = "أسرة متعففة كُفلت بالكامل 👥";
+
         const defaultCases = [
-            { id: 1, title: 'كفالة أسر متعففة (مبادرة رأفة)', image: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=500', desc: 'توفير السلال الغذائية والاحتياجات الأساسية لـ 20 أسرة متعففة ومتضررة.', impact: 'تبرعك يضمن بقاء هذه الأسر بكرامة وتأمين قوت يومهم الأساسي.', target: 500000, raised: 325000, completed: false }
+            { id: 1, title: "توفير الرسوم الدراسية والجامعية للطلاب من الأسر المتعففة", target: 450000, raised: 150000, completed: false },
+            { id: 2, title: "كفالة صحية وتوفير الأدوية الدورية للأمراض المزمنة وعلاج الأطفال", target: 300000, raised: 200000, completed: false }
         ];
+        const defaultShares = [
+            { name: "🌱 سهم دواء", amount: 5000 },
+            { name: "📦 سهم غذاء", amount: 15000 },
+            { name: "🤝 كفالة عائلية", amount: 50000 }
+        ];
+        const defaultAmbassadors = ["ميثاق عمر محمود"]; 
 
-        function toggleT() {
-            let b = document.documentElement;
-            b.getAttribute('data-theme') === 'dark' ? b.removeAttribute('data-theme') : b.setAttribute('data-theme', 'dark');
+        function getIconForCase(title) {
+            if(title.includes('طفلة') || title.includes('علاج') || title.includes('أدوية') || title.includes('صحية')) return 'fa-solid fa-child-holding-heart';
+            if(title.includes('الرسوم') || title.includes('الدراسية') || title.includes('الجامعية')) return 'fa-solid fa-graduation-cap';
+            return 'fa-solid fa-hand-holding-heart';
         }
-        function copyN() { navigator.clipboard.writeText('5270255').then(() => alert('🚀 تم نسخ رقم الحساب!')); }
-        function openM() { 
-            document.getElementById('vModal').style.display = 'flex';
-            document.getElementById('volWaLink').classList.remove('ready');
-            document.getElementById('vName').oninput = checkVolInputs;
-            document.getElementById('vPhone').oninput = checkVolInputs;
+
+        function initApp() {
+            const savedTheme = localStorage.getItem('rafa_theme_preference');
+            if(savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+
+            const savedCases = localStorage.getItem('rafa_clean_cases_v80');
+            const savedAmbs = localStorage.getItem('rafa_clean_ambs_v80');
+            const savedShares = localStorage.getItem('rafa_clean_shares_v80');
+            
+            // استرجاع الإعدادات المخصصة لعبارة الكفالة
+            const savedFamCount = localStorage.getItem('rafa_family_custom_count');
+            const savedFamText = localStorage.getItem('rafa_family_custom_text');
+
+            casesData = savedCases ? JSON.parse(savedCases) : [...defaultCases];
+            ambassadorsData = savedAmbs ? JSON.parse(savedAmbs) : [...defaultAmbassadors];
+            donationSharesData = savedShares ? JSON.parse(savedShares) : [...defaultShares];
+            
+            familyCustomCount = savedFamCount ? savedFamCount : "4 من 20";
+            familyCustomText = savedFamText ? savedFamText : "أسرة متعففة كُفلت بالكامل 👥";
+
+            // ملء خانات الإدارة بالقيم الحالية تلقائياً
+            document.getElementById('adminFamilyCustomCount').value = familyCustomCount;
+            document.getElementById('adminFamilyCustomText').value = familyCustomText;
+
+            syncStorage();
+            renderComponents();
+            renderPersonalImpactBannerLive();
         }
-        function closeM() { document.getElementById('vModal').style.display = 'none'; }
-        
-        function loadData() {
-            const saved = localStorage.getItem('rafa_cases_data');
-            cases = saved ? JSON.parse(saved) : [...defaultCases];
-            if(!saved) saveData();
-            render();
+
+        function syncStorage() {
+            localStorage.setItem('rafa_clean_cases_v80', JSON.stringify(casesData));
+            localStorage.setItem('rafa_clean_ambs_v80', JSON.stringify(ambassadorsData));
+            localStorage.setItem('rafa_clean_shares_v80', JSON.stringify(donationSharesData));
+            localStorage.setItem('rafa_family_custom_count', familyCustomCount);
+            localStorage.setItem('rafa_family_custom_text', familyCustomText);
         }
-        function saveData() { localStorage.setItem('rafa_cases_data', JSON.stringify(cases)); }
 
-        function render() {
-            const list = document.getElementById('cases-list');
-            list.innerHTML = '';
+        function showToastNoticeLive(message) {
+            const toast = document.getElementById('toastNotice');
+            document.getElementById('toastMessage').innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+        }
 
-            cases.forEach(c => {
-                let pct = c.completed ? 100 : Math.round((c.raised / c.target) * 100);
-                if(pct > 100) pct = 100;
-                let remaining = Math.max(0, c.target - c.raised);
+        function copyAccountToClipboardLive(textNumber) {
+            navigator.clipboard.writeText(textNumber).then(() => {
+                showToastNoticeLive("تم نسخ رقم الحساب بنجاح، جزاك الله خيراً 🌿");
+            }).catch(() => { alert("تم النسخ: " + textNumber); });
+        }
 
-                let badge = c.completed ? '<span class="badge" style="background:#f0fff4; color:#38a169;">مكتملة ✅</span>' : '<span class="badge">حالة نشطة 🔥</span>';
-                
-                // التحقق من وجود صورة للحالة أو وضع مساحة فارغة
-                let imgTag = c.image ? `<img src="${c.image}" class="case-img" alt="صورة الحالة">` : '';
+        function injectQuickShareAmountLive(amount, name) {
+            document.getElementById('userDonationAmount').value = amount;
+            showToastNoticeLive(`تم اختيار سهم بقيمة ${amount.toLocaleString()} ج (${name}) 💎`);
+        }
 
-                let donateSection = c.completed 
-                    ? `<div style="background:#f0fff4; color:#38a169; text-align:center; padding:10px; border-radius:10px; font-weight:bold; font-size:12px; margin-top:10px;">🎉 تم اكتمال الحالة بالكامل وجزاكم الله خيراً!</div>`
-                    : `<div class="case-quick-donate">
-                        <span style="font-size:11px; font-weight:bold;">التبرع السريع للحالة ⚡</span>
-                        <div class="q-btns">
-                            <button class="q-btn" onclick="setQ(5000, this)">5,000 ج</button>
-                            <button class="q-btn" onclick="setQ(10000, this)">10,000 ج</button>
-                            <button class="q-btn" onclick="setQ(20000, this)">20,000 ج</button>
-                        </div>
-                        <input type="number" class="q-in" placeholder="أو أدخل مبلغاً آخر هنا..." oninput="checkInput(this)">
-                        
-                        <!-- إضافة قسم الإهداء الذكي -->
-                        <div class="gift-section">
-                            <label class="gift-label">
-                                <input type="checkbox" class="gift-check" onchange="toggleGiftFields(this)"> أرغب في جعل هذا التبرع إهداءً 🎁
-                            </label>
-                            <div class="gift-fields">
-                                <input type="text" class="gift-in donor-name" placeholder="اسم المُهدي (مثال: فاعل خير)...">
-                                <input type="text" class="gift-in rec-name" placeholder="إلى (اسم المُهدى إليه)...">
-                            </div>
-                        </div>
+        function renderPersonalImpactBannerLive() {
+            const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
+            const banner = document.getElementById('personal-impact-banner');
+            if(obj = document.getElementById('personal-impact-text')) {
+                if(Number(historyCount) > 0) {
+                    obj.innerText = `✨ بفضل الله، لقد ساهمتِ سابقاً in دعم ومساندة وتفريج كربات (${historyCount}) أسر في منصتنا. جزاكِ الله خيراً وضاعف أجركِ! 🌿`;
+                    banner.style.display = 'flex';
+                } else { banner.style.display = 'none'; }
+            }
+        }
 
-                        <a href="#" target="_blank" class="btn-submit" onclick="return triggerDonateWA(this, '${c.title}')">تم التبرع لهذه الحالة</a>
-                       </div>`;
+        function runAnimateCounterLive(elementId, start, end, duration, suffix = "") {
+            const obj = document.getElementById(elementId);
+            if (!obj) return;
+            if (end === start) { obj.innerText = end.toLocaleString() + suffix; return; }
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const currentVal = Math.floor(progress * (end - start) + start);
+                obj.innerText = currentVal.toLocaleString() + suffix;
+                if (progress < 1) { window.requestAnimationFrame(step); }
+            };
+            window.requestAnimationFrame(step);
+        }
 
-                let adminTools = (isLogged && !c.completed)
-                    ? `<div class="admin-tools">
-                        <button class="btn-v" style="background:#38a169; color:#fff;" onclick="markDone(${c.id})">✔ إغلاق</button>
-                        <input type="number" style="width:50%; margin:0; padding:4px;" id="silent-${c.id}" placeholder="تحديث المبلغ المستلم...">
-                        <button class="btn-v" style="background:#dd6b20; color:#fff;" onclick="addSilent(${c.id})">➕</button>
-                       </div>`
-                    : '';
+        function switchPageLive(pageId) {
+            document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.smart-footer .footer-item').forEach(t => t.classList.remove('active'));
+            
+            const selectedPage = document.getElementById(`page-${pageId}`);
+            const selectedTab = document.getElementById(`tab-${pageId}`);
+            const bodyWrapper = document.getElementById('body-wrapper');
+            
+            if(selectedPage) selectedPage.classList.add('active');
+            if(selectedTab) selectedTab.classList.add('active');
+            
+            bodyWrapper.classList.toggle('home-active', pageId === 'home');
+            
+            const indicators = { 'home': 'الرئيسية', 'cases': 'حالات التبرع والمؤشرات', 'admin': 'لوحة تحكم الإدارة' };
+            if(document.getElementById('page-title-indicator')) {
+                document.getElementById('page-title-indicator').innerText = indicators[pageId] || 'الرئيسية';
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                list.innerHTML += `
-                    <div class="card">
-                        ${imgTag}
-                        <div class="card-body">
-                            <div class="flex"><h3 style="margin:0; font-size:14px; color:var(--p);">${c.title}</h3>${badge}</div>
-                            <p style="font-size:11px; color:var(--sub); margin: 6px 0;">${c.desc}</p>
-                            <div class="imp"><strong>أثر السهم:</strong> ${c.impact}</div>
-                            <div class="flex" style="margin:12px 0; background:rgba(0,0,0,0.01); padding:8px; border-radius:8px;">
-                                <div style="font-size:11px;">
-                                    <div>المتبقي: <strong>${remaining.toLocaleString()} ج</strong></div>
-                                    <div style="color:var(--sub); margin-top:2px;">المستهدف: ${c.target.toLocaleString()} ج</div>
+            if (pageId === 'home') {
+                renderPersonalImpactBannerLive();
+            }
+
+            if (pageId === 'cases') {
+                let totalTarget = casesData.reduce((sum, c) => sum + c.target, 0);
+                let totalRaised = casesData.reduce((sum, c) => sum + c.raised, 0);
+                let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
+                if(globalPct > 100) globalPct = 100;
+
+                setTimeout(() => {
+                    runAnimateCounterLive('global-collected-text', 0, totalRaised, 1500, " ج");
+                    runAnimateCounterLive('global-target-text', 0, totalTarget, 1500, " ج");
+                    runAnimateCounterLive('global-pct-text', 0, globalPct, 1800, "%");
+                    
+                    document.querySelectorAll('.individual-inner-bar').forEach(bar => {
+                        const targetPct = bar.getAttribute('data-pct');
+                        bar.style.width = targetPct + "%";
+                    });
+                }, 50);
+            }
+        }
+
+        function switchAdminSubTab(subTabId) {
+            document.querySelectorAll('.admin-sub-page').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(`admin-sub-page-${subTabId}`).classList.add('active');
+            document.getElementById(`tab-sub-${subTabId}`).classList.add('active');
+        }
+
+        function toggleDrawer(open) {
+            const drawer = document.getElementById('sideDrawer');
+            const overlay = document.getElementById('drawerOverlay');
+            if(open) { drawer.classList.add('open'); overlay.classList.add('open'); }
+            else { drawer.classList.remove('open'); overlay.classList.remove('open'); }
+        }
+
+        function toggleAmbassadorsDropdown() {
+            document.getElementById('ambassadors-dropdown').classList.toggle('show');
+        }
+
+        function toggleContactDropdown() {
+            document.getElementById('contact-dropdown').classList.toggle('show');
+        }
+
+        function renderComponents() {
+            let totalTarget = casesData.reduce((sum, c) => sum + c.target, 0);
+            let totalRaised = casesData.reduce((sum, c) => sum + c.raised, 0);
+            let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
+            if(globalPct > 100) globalPct = 100;
+
+            document.getElementById('global-collected-text').innerText = totalRaised.toLocaleString() + " ج";
+            document.getElementById('global-target-text').innerText = totalTarget.toLocaleString() + " ج";
+            document.getElementById('global-live-bar').style.width = globalPct + "%";
+            document.getElementById('global-pct-text').innerText = `${globalPct}%`;
+            
+            // عرض العبارة والرقم التراكمي المخصص من الإدارة بشكل مباشر
+            document.getElementById('families-raised-count').innerText = `${familyCustomCount} ${familyCustomText}`;
+
+            const container = document.getElementById('cases-container');
+            const archiveContainer = document.getElementById('cases-archive-container');
+            container.innerHTML = ''; archiveContainer.innerHTML = '';
+
+            let activeCount = 0; let archiveCount = 0;
+
+            casesData.forEach((c, index) => {
+                let pct = Math.round((c.raised / c.target) * 100); if(pct > 100) pct = 100;
+                let remain = Math.max(0, c.target - c.raised);
+                let caseIcon = getIconForCase(c.title);
+
+                if (!c.completed) {
+                    activeCount++;
+                    container.innerHTML += `
+                        <div class="luxury-card">
+                            <div class="card-header-ui">
+                                <div class="case-icon-wrapper">
+                                    <div class="case-icon-circle"><i class="${caseIcon}"></i></div>
+                                    <div style="font-size:12px; font-weight:700; color:var(--text-sub);">مبادرة رأفة</div>
                                 </div>
-                                <div class="ring-wrap">
-                                    <svg width="60" height="60">
-                                        <circle stroke="rgba(0,0,0,0.05)" stroke-width="4" fill="transparent" r="24" cx="30" cy="30"/>
-                                        <circle stroke="var(--p)" stroke-width="4" stroke-dasharray="150" stroke-dashoffset="${150 - (pct/100)*150}" fill="transparent" r="24" cx="30" cy="30" class="ring"/>
-                                    </svg>
-                                    <div class="ring-txt">${pct}%</div>
+                                <span class="case-badge-status active">حالة نشطة جارية</span>
+                            </div>
+                            <div class="luxury-title">${c.title}</div>
+                            <div class="progress-container-ui">
+                                <div class="progress-labels-ui">
+                                    <span style="color:var(--text-sub);">نسبة الدعم والوصول</span>
+                                    <span style="color:var(--primary); font-size:13px; font-weight:800;">${pct}%</span>
                                 </div>
+                                <div class="luxury-bar-outer"><div class="luxury-bar-inner individual-inner-bar" data-pct="${pct}" style="width: 0%;"></div></div>
                             </div>
-                            ${donateSection}
-                            <div class="bank flex">
-                                <div><strong>تحويل بنكك:</strong> 5270255 <br><small style="color:var(--sub)">باسم: ميثاق عمر محمود</small></div>
-                                <button style="background:var(--p); color:#fff; border:0; padding:4px 10px; border-radius:4px; cursor:pointer; font-family:'Cairo'; font-size:11px;" onclick="copyN()">نسخ</button>
+                            <div class="stats-row-ui">
+                                <div class="stat-item-ui"><span class="label">المبلغ المدفوع (المجموع)</span><span class="value" style="color:#10b981;">${c.raised.toLocaleString()} ج</span></div>
+                                <div class="stat-item-ui" style="text-align: center;"><span class="label">المتبقي للاكتمال</span><span class="value" style="color:#ef4444;">${remain.toLocaleString()} ج</span></div>
+                                <div class="stat-item-ui" style="text-align: left;"><span class="label">المبلغ الكلي</span><span class="value" style="color:var(--text-main);">${c.target.toLocaleString()} ج</span></div>
                             </div>
-                            <a href="https://api.whatsapp.com/send?phone=${adminPhone}&text=${encodeURIComponent('السلام عليكم، أود الاستفسار والمتابعة مع إدارة منصة رأفة.')}" class="btn-wa" target="_blank">تواصل للاستفسار 💬</a>
-                            ${adminTools}
-                        </div>
+                            <button class="btn-luxury-action" onclick="openDonationModal(${index})">تقديم مساهمة للملف <i class="fa-solid fa-arrow-left"></i></button>
+                        </div>`;
+                } else {
+                    archiveCount++;
+                    archiveContainer.innerHTML += `
+                        <div class="luxury-card" style="opacity: 0.85; border-right: 5px solid #10b981;">
+                            <div class="card-header-ui">
+                                <div class="case-icon-wrapper">
+                                    <div class="case-icon-circle" style="background:rgba(16,185,129,0.1); color:#10b981;"><i class="fa-solid fa-check"></i></div>
+                                    <div style="font-size:12px; font-weight:700; color:var(--text-sub);">ملفات الحصاد</div>
+                                </div>
+                                <span class="case-badge-status completed">مكفولة بالكامل ✅</span>
+                            </div>
+                            <div class="luxury-title" style="text-decoration: line-through; color: var(--text-sub);">${c.title}</div>
+                            <div class="stats-row-ui" style="margin-bottom:0; border-bottom:0; padding-bottom:0;">
+                                <div class="stat-item-ui"><span class="label">إجمالي الكفالة والوصول</span><span class="value" style="color:#10b981;">${c.target.toLocaleString()} ج</span></div>
+                                <div class="stat-item-ui" style="text-align: left;"><span class="label">الحالة</span><span class="value" style="font-size:12px; color:#065f46;">اكتملت وتم التسليم 🌿</span></div>
+                            </div>
+                        </div>`;
+                }
+            });
+
+            if(activeCount === 0) {
+                container.innerHTML = `<p style="text-align:center; color:var(--text-sub); padding:30px; font-size:13px;">لا توجد حالات جارية حالياً، انتظرونا قريباً ✨</p>`;
+            }
+            document.getElementById('archive-section-title').style.display = archiveCount > 0 ? 'flex' : 'none';
+
+            const sharesBtnContainer = document.getElementById('live-shares-buttons-container');
+            sharesBtnContainer.innerHTML = '';
+            donationSharesData.forEach(share => {
+                sharesBtnContainer.innerHTML += `
+                    <button class="btn-share-quick" onclick="injectQuickShareAmountLive(${share.amount}, '${share.name}')">
+                        ${share.name}<br><b>${share.amount.toLocaleString()} ج</b>
+                    </button>`;
+            });
+
+            const adminSharesList = document.getElementById('admin-shares-control-list');
+            adminSharesList.innerHTML = '';
+            donationSharesData.forEach((share, idx) => {
+                adminSharesList.innerHTML += `
+                    <div class="admin-amb-row">
+                        <span>💎 ${share.name} (${share.amount.toLocaleString()} ج)</span>
+                        <button class="btn-action" style="background:#ef4444; padding:2px 8px; font-size:11px;" onclick="deleteDonationShareLive(${idx})">❌ حذف</button>
                     </div>`;
             });
-            updateStats();
+
+            const tableBody = document.getElementById('admin-cases-table-body');
+            tableBody.innerHTML = '';
+            casesData.forEach((c, index) => {
+                tableBody.innerHTML += `
+                    <tr>
+                        <td style="font-weight:600; line-height:1.4; max-width:130px;">${c.title}</td>
+                        <td style="font-size:11px; font-weight:700; white-space:nowrap;">${c.raised.toLocaleString()}<br><span style="color:var(--text-sub); font-weight:400;">من</span> ${c.target.toLocaleString()}</td>
+                        <td style="text-align: center; white-space:nowrap;">
+                            <button class="btn-table-action edit" title="تعديل يدوي" onclick="openEditCaseModalLive(${index})"><i class="fa-solid fa-pen"></i></button>
+                            <button class="btn-table-action add-cash" title="تغذية وإضافة تبرع سريعة" onclick="openQuickCashModalLive(${index})"><i class="fa-solid fa-money-bill-medical"></i> 💸</button>
+                            <button class="btn-table-action complete" title="أرشفة واكتمال" onclick="markCaseCompletedLive(${index})"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn-table-action delete" title="حذف" onclick="deleteCaseLive(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                        </td>
+                    </tr>`;
+            });
+
+            const publicDrawerList = document.getElementById('ambassadors-live-list');
+            const adminList = document.getElementById('admin-amb-delete-list');
+            publicDrawerList.innerHTML = ''; adminList.innerHTML = '';
+
+            ambassadorsData.forEach((name, idx) => {
+                publicDrawerList.innerHTML += `<div class="amb-badge"><i class="fa-solid fa-user-check" style="color:var(--primary);"></i> ${name}</div>`;
+                adminList.innerHTML += `
+                    <div class="admin-amb-row">
+                        <span>👤 ${name}</span>
+                        <button class="btn-action" style="background:#ef4444; padding:2px 8px; font-size:11px;" onclick="deleteAmbassadorLive(${idx})">❌</button>
+                    </div>`;
+            });
         }
 
-        function setQ(amt, btn) {
-            let p = btn.closest('.case-quick-donate');
-            p.querySelector('.q-in').value = amt;
-            selectedAmt = amt;
-            p.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            p.querySelector('.btn-submit').classList.add('ready');
-            p.querySelector('.gift-section').style.display = 'block'; // إظهار خيار الإهداء
+        // تابع حفظ إعدادات العبارة والرقم من الإدارة 💾
+        function saveCustomFamilyConfigLive() {
+            const countInput = document.getElementById('adminFamilyCustomCount').value.trim();
+            const textInput = document.getElementById('adminFamilyCustomText').value.trim();
+
+            if(!countInput || !textInput) {
+                alert("⚠️ فضلاً، الحقول لا يمكن أن تكون فارغة.");
+                return;
+            }
+
+            familyCustomCount = countInput;
+            familyCustomText = textInput;
+
+            syncStorage();
+            renderComponents();
+            showToastNoticeLive("تم حفظ وتحديث عبارة الكفالة بنجاح! 🎉");
         }
 
-        function checkInput(el) {
-            selectedAmt = Number(el.value);
-            let p = el.closest('.case-quick-donate');
-            let btn = p.querySelector('.btn-submit');
-            if(selectedAmt > 0) { 
-                btn.classList.add('ready'); 
-                p.querySelector('.gift-section').style.display = 'block'; // إظهار خيار الإهداء
-            } 
-            else { 
-                btn.classList.remove('ready'); 
-                p.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
-                p.querySelector('.gift-section').style.display = 'none'; // إخفاء الإهداء إذا صفر المبلغ
+        function openQuickCashModalLive(index) {
+            document.getElementById('quickCashCaseIndex').value = index;
+            document.getElementById('quickCashTitleLabel').innerText = `الملف: ${casesData[index].title}`;
+            document.getElementById('quickCashAmountInput').value = '';
+            document.getElementById('quickCashModal').style.display = 'flex';
+        }
+
+        function closeQuickCashModal() {
+            document.getElementById('quickCashModal').style.display = 'none';
+        }
+
+        function submitQuickCashLive() {
+            const idx = Number(document.getElementById('quickCashCaseIndex').value);
+            const cashAmount = Number(document.getElementById('quickCashAmountInput').value);
+
+            if (cashAmount <= 0 || !cashAmount) {
+                alert("⚠️ يرجى إدخال مبلغ صحيح أكبر من الصفر.");
+                return;
+            }
+
+            casesData[idx].raised += cashAmount;
+            if (casesData[idx].raised >= casesData[idx].target) {
+                casesData[idx].raised = casesData[idx].target;
+                casesData[idx].completed = true;
+                showToastNoticeLive("تم اكتمال ملف الحالة تلقائياً ونقله للحصاد! 🎉");
+            } else {
+                showToastNoticeLive(`تمت إضافة ${cashAmount.toLocaleString()} ج للملف بنجاح وتحديث النسب! 🌿`);
+            }
+
+            syncStorage();
+            renderComponents();
+            closeQuickCashModal();
+        }
+
+        function addNewDonationShareLive() {
+            const nameInput = document.getElementById('newShareName');
+            const amtInput = document.getElementById('newShareAmt');
+            const name = nameInput.value.trim();
+            const amt = Number(amtInput.value);
+
+            if (name && amt > 0) {
+                donationSharesData.push({ name: name, amount: amt });
+                syncStorage(); renderComponents();
+                nameInput.value = ''; amtInput.value = '';
+                showToastNoticeLive("تم إضافة سهم التبرع بنجاح! 🚀");
+            } else { alert("⚠️ يرجى تعبئة الحقول بشكل صحيح."); }
+        }
+
+        function deleteDonationShareLive(idx) {
+            if(confirm("هل تريدين حذف سهم التبرع هذا نهائياً؟")) {
+                donationSharesData.splice(idx, 1);
+                syncStorage(); renderComponents();
             }
         }
 
-        // دالة إظهار وإخفاء حقول الإهداء
-        function toggleGiftFields(chk) {
-            let fields = chk.closest('.gift-section').querySelector('.gift-fields');
-            fields.style.display = chk.checked ? 'flex' : 'none';
+        function generateWhatsAppReportLive() {
+            let totalTarget = casesData.reduce((sum, c) => sum + c.target, 0);
+            let totalRaised = casesData.reduce((sum, c) => sum + c.raised, 0);
+            let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
+            let activeCases = casesData.filter(c => !c.completed);
+
+            let report = `📊 *تقرير الموقف الحالي - مبادرة رأفة الخيرية* 🌿\n\n` +
+                         `• المستهدف الكلي: ${totalTarget.toLocaleString()} ج\n` +
+                         `• المجموع المستلم: ${totalRaised.toLocaleString()} ج (${globalPct}%)\n` +
+                         `• الإحصائية الحالية: ${familyCustomCount} ${familyCustomText}\n\n` +
+                         `📝 *موقف الحالات الجارية:* \n`;
+
+            activeCases.forEach((c, idx) => {
+                let pct = Math.round((c.raised / c.target) * 100);
+                report += `${idx + 1}. *${c.title}*\n   - تم جمع: ${c.raised.toLocaleString()} ج من ${c.target.toLocaleString()} ج (${pct}%)\n`;
+            });
+
+            report += `\n💳 *حساب التحويل بنكك:* 5270255\n👤 *باسم:* ميثاق عمر محمود\n\nجزاكم الله خيراً؛`;
+
+            navigator.clipboard.writeText(report).then(() => {
+                alert("📋 تم نسخ التقرير المالي بنجاح لقروبات الواتساب!");
+            });
         }
 
-        // تحديث رسالة الواتساب الفخمة لتشمل بيانات الإهداء إذا تم تحديدها
-        function triggerDonateWA(anchor, title) {
-            if(selectedAmt <= 0) return false;
-            let p = anchor.closest('.case-quick-donate');
-            let isGift = p.querySelector('.gift-check').checked;
+        function openDonationModal(index) {
+            activeCaseIndexForDonation = index;
+            document.getElementById('userDonationAmount').value = ''; 
+            document.getElementById('donationModal').style.display = 'flex';
+        }
+
+        function processDonationLive() {
+            const amtInput = document.getElementById('userDonationAmount');
+            const amt = Number(amtInput.value);
+
+            if(!amt || amt <= 0) { alert("⚠️ فضلاً، أدخلي مبلغ تبرع صحيح أولاً."); return; }
+
+            const selectedCase = casesData[activeCaseIndexForDonation];
             
-            let text = `السلام عليكم، تم التبرع بمبلغ ${selectedAmt.toLocaleString()} جنيه لحالة (${title}) وجاري إرسال إشعار التحويل المالي.`;
+            let waText = `✨ *إشعار مساهمة جديدة - مبادرة رأفة الخيرية* ✨\n\n` +
+                         `السلام عليكم ورحمة الله وبركاته،\n` +
+                         `أود إفادتكم بأني قمت بتقديم دعم مالي للمبادرة كالتالي:\n\n` +
+                         `📂 *الملف الخيري:* ${selectedCase.title}\n` +
+                         `💰 *قيمة المساهمة:* ${amt.toLocaleString()} جنيه سوداني\n` +
+                         `\n📍 مرفق لكم إشعار التحويل البنكي الرسمي من تطبيق بنكك للتأكيد.\n\n` +
+                         `جزاكم الله خيراً؛`;
+
+            const waUrl = `https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)}`;
             
-            if(isGift) {
-                let donor = p.querySelector('.donor-name').value || "فاعل خير";
-                let recipient = p.querySelector('.rec-name').value || "من يحب";
-                text += `\n\n🎁 [ هذا التبرع عبارة عن إهداء ]\n• من: ${donor}\n• إلى: ${recipient}`;
+            let historyCount = Number(localStorage.getItem('rafa_my_impact_count') || 0);
+            localStorage.setItem('rafa_my_impact_count', historyCount + 1);
+
+            closeDonationModal();
+            document.getElementById('thankYouModal').style.display = 'flex';
+            window.open(waUrl, '_blank');
+        }
+
+        function closeDonationModal() { document.getElementById('donationModal').style.display = 'none'; }
+        function closeThankYouModal() { document.getElementById('thankYouModal').style.display = 'none'; renderPersonalImpactBannerLive(); }
+        
+        function copyAppUrlToShareLive() {
+            const currentActiveCasesNames = casesData.filter(c => !c.completed).map(c => `• ${c.title}`).join('\n');
+            const shareText = `🕊️ *مبادرة رأفة الخيرية | كفالة الأسر المتعففة* 🌿\n\n` +
+                              `ندعوكم للمساهمة معنا في سد حوائج العون الطبي والغذائي والدراسي للأسر المتعففة وعلاج الأطفال.\n\n` +
+                              `📌 *من ملفاتنا النشطة حالياً بحاجة لدعمكم:*\n${currentActiveCasesNames}\n\n` +
+                              `👥 الإحصائية الحالية المنجزة: (${familyCustomCount} ${familyCustomText}) بفضل الله ثم بدعمكم.\n\n` +
+                              `🔗 تصفحوا المنصة التفاعلية كاملة وتابعوا الموقف المالي بشفافية مباشرة من هنا:\n${window.location.href}\n\n` +
+                              `الدال على الخير كفاعله، شاركونا الأجر بالنشر والمساندة ✨`;
+
+            navigator.clipboard.writeText(shareText).then(() => {
+                alert("📋 تم نسخ رسالة المشاركة الترويجية المنسقة بنجاح وجاهزة للنشر فوراً!");
+                closeThankYouModal();
+            });
+        }
+
+        function openEditCaseModalLive(index) {
+            document.getElementById('editCaseIndex').value = index;
+            document.getElementById('editCaseRaised').value = casesData[index].raised;
+            document.getElementById('editCaseTarget').value = casesData[index].target;
+            document.getElementById('editCaseModal').style.display = 'flex';
+        }
+
+        function saveCaseEditsLive() {
+            const idx = Number(document.getElementById('editCaseIndex').value);
+            const newRaised = Number(document.getElementById('editCaseRaised').value);
+            const newTarget = Number(document.getElementById('editCaseTarget').value);
+
+            if(newTarget > 0 && newRaised >= 0) {
+                casesData[idx].raised = newRaised;
+                casesData[idx].target = newTarget;
+                casesData[idx].completed = (newRaised >= newTarget);
+                syncStorage(); renderComponents(); closeEditModal();
+                alert("💾 تم حفظ التعديلات!");
             }
-
-            anchor.href = "https://api.whatsapp.com/send?phone=" + adminPhone + "&text=" + encodeURIComponent(text);
-            return true;
         }
 
-        function checkVolInputs() {
-            let n = document.getElementById('vName').value;
-            let p = document.getElementById('vPhone').value;
-            let link = document.getElementById('volWaLink');
-            if(n && p) { link.classList.add('ready'); } else { link.classList.remove('ready'); }
+        function closeEditModal() { document.getElementById('editCaseModal').style.display = 'none'; }
+
+        function markCaseCompletedLive(index) {
+            if(confirm(`هل تريدين نقل ملف "${casesData[index].title}" إلى أرشيف الحصاد المكتمل كُلياً؟`)) {
+                casesData[index].raised = casesData[index].target;
+                casesData[index].completed = true;
+                syncStorage(); renderComponents();
+            }
         }
 
-        function sendVolWA() {
-            let n = document.getElementById('vName').value;
-            let p = document.getElementById('vPhone').value;
-            if(!n || !p) return false;
-            let text = `طلب انضمام سفراء الخير:\nالاسم الكامل: ${n}\nرقم الهاتف: ${p}`;
-            document.getElementById('volWaLink').href = "https://api.whatsapp.com/send?phone=" + adminPhone + "&text=" + encodeURIComponent(text);
-            setTimeout(closeM, 500);
-            return true;
+        function deleteCaseLive(index) {
+            if(confirm(`حذف هذه الحالة نهائياً؟`)) { casesData.splice(index, 1); syncStorage(); renderComponents(); }
         }
 
-        function unlockAdmin() {
-            let pass = prompt("🔑 الرمز السري للمشرفين:");
-            if(pass === "5270255") { isLogged = true; document.getElementById('admin-panel').style.display = 'block'; render(); } 
-            else { alert("الرمز خطأ! ❌"); }
+        function checkAdminPassword() {
+            const pass = document.getElementById('adminPassInput').value;
+            if(pass === "ghsnraafa2026") {
+                document.getElementById('admin-lock-screen').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                renderComponents();
+            } else { alert("الرمز السري غير صحيح! ❌"); }
         }
 
-        function createNewCase() {
-            let t = document.getElementById('newCaseTitle').value;
-            let img = document.getElementById('newCaseImage').value; // جلب رابط الصورة الجديد
-            let d = document.getElementById('newCaseDesc').value;
-            let i = document.getElementById('newCaseImpact').value;
-            let tg = document.getElementById('newCaseTarget').value;
-            if(!t || !tg) return;
-            cases.push({ id: cases.length+1, title: t, image: img, desc: d, impact: i, target: Number(tg), raised: 0, completed: false });
-            saveData(); render();
-            document.getElementById('newCaseTitle').value=''; document.getElementById('newCaseImage').value=''; document.getElementById('newCaseDesc').value=''; document.getElementById('newCaseImpact').value=''; document.getElementById('newCaseTarget').value='';
+        function addNewCaseLive() {
+            const title = document.getElementById('newCaseTitle').value.trim();
+            const target = Number(document.getElementById('newCaseTarget').value);
+            if(title && target > 0) {
+                casesData.push({ id: casesData.length + 1, title: title, target: target, raised: 0, completed: false });
+                syncStorage(); renderComponents();
+                document.getElementById('newCaseTitle').value = '';
+                document.getElementById('newCaseTarget').value = '';
+                alert("🚀 تم النشر بنجاح!");
+                switchAdminSubTab('view');
+            }
         }
 
-        function addSilent(id) {
-            let val = Number(document.getElementById(`silent-${id}`).value);
-            let c = cases.find(item => item.id === id);
-            if(c && val > 0) { c.raised += val; if(c.raised >= c.target) c.completed = true; saveData(); render(); }
+        function addAmbassadorLive() {
+            const input = document.getElementById('newAmbInput');
+            const name = input.value.trim();
+            if(name) { ambassadorsData.push(name); syncStorage(); renderComponents(); input.value = ''; }
         }
 
-        function markDone(id) { let c = cases.find(item => item.id === id); if(c) { c.completed = true; saveData(); render(); } }
+        function deleteAmbassadorLive(idx) {
+            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { ambassadorsData.splice(idx, 1); syncStorage(); renderComponents(); }
+        }
 
-        function updateStats() {
-            let total = cases.reduce((sum, c) => sum + c.raised, 0);
-            let comp = cases.filter(c => c.completed).length;
-            document.getEleme
+        function openVolunteerModal() { document.getElementById('volunteerModal').style.display = 'flex'; }
+        function closeVolunteerModal() { document.getElementById('volunteerModal').style.display = 'none'; }
+        
+        function submitVolunteerLive() {
+            const name = document.getElementById('vName').value.trim();
+            const gender = document.getElementById('vGender').value;
+            const phone = document.getElementById('vPhone').value.trim();
+            if(name.split(/\s+/).length < 3 || !gender || !phone) { alert("⚠️ فضلاً، يرجى تعبئة كافة الحقول والاسم ثلاثي."); return; }
+            const text = `طلب انضمام جديد لسفراء الخير:\nالاسم: ${name}\nالجنس: ${gender}\nالهاتف: ${phone}`;
+            window.open(`https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(text)}`, '_blank');
+            closeVolunteerModal();
+        }
+
+        function toggleThemeLive() {
+            const doc = document.documentElement;
+            if(doc.getAttribute('data-theme') === 'dark') {
+                doc.removeAttribute('data-theme');
+                localStorage.setItem('rafa_theme_preference', 'light');
+            } else {
+                doc.setAttribute('data-theme', 'dark');
+                localStorage.setItem('rafa_theme_preference', 'dark');
+            }
+        }
+
+        initApp();
+    </script>
+</body>
+</html>
