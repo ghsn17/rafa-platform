@@ -1,2 +1,2 @@
-# rafa-platform
+# rafa
 مبادرة رأفة الخيرية
