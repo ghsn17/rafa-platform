@@ -18,8 +18,6 @@
             --text-sub: #4d5e75;
             --gradient-bar: linear-gradient(90deg, #d4b235, #47604f);
             --border-color: #e2e8f0; 
-            
-            /* ألوان البطاقة الفاخرة */
             --card-gradient: linear-gradient(135deg, #13261a 0%, #1e3d29 50%, #142d1e 100%);
             --gold-accent: #d4af37;
             --text-white: #f4f6f4;
@@ -144,16 +142,6 @@
         .toast-notice { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; color: #ffffff; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 2000; opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px; }
         .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-        .gift-toggle-options { display: flex; justify-content: center; gap: 12px; margin: 12px 0 18px 0; }
-        .gift-toggle-btn { position: relative; cursor: pointer; flex: 1; text-align: center; }
-        .gift-toggle-btn input { position: absolute; opacity: 0; cursor: pointer; }
-        .gift-toggle-text { display: block; padding: 10px; background: var(--card-sub-bg); color: var(--text-sub); border: 1px solid var(--border-color); border-radius: 12px; font-size: 12.5px; font-weight: 700; transition: all 0.2s ease; }
-        .gift-toggle-btn input:checked ~ .gift-toggle-text { background: var(--primary); color: white; border-color: var(--primary); box-shadow: 0 4px 10px rgba(71, 96, 79, 0.15); }
-        .custom-blessing-area { display: none; margin-bottom: 15px; animation: modalSlideUp 0.25s ease-out; }
-        .custom-blessing-area.show { display: block; }
-        .custom-blessing-area textarea { width: 100%; height: 85px; padding: 12px; border: 1px solid var(--border-color); border-radius: 12px; font-family: 'Cairo'; font-size: 13px; background: var(--card-bg); color: var(--text-main); resize: none; }
-        .custom-blessing-area textarea:focus { border-color: var(--accent); outline: none; }
-
         .admin-tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
         .admin-tab-btn { background: transparent; color: var(--text-sub); border: none; padding: 8px 10px; font-family: 'Cairo'; font-weight: 700; font-size: 12px; cursor: pointer; border-radius: 8px; }
         .admin-tab-btn.active { background: var(--primary); color: white; }
@@ -181,7 +169,7 @@
         .drawer-dropdown-content { display: none; flex-direction: column; gap: 6px; padding: 5px 10px 15px; }
         .drawer-dropdown-content.show { display: flex; }
 
-        .amb-badge { background: var(--bg-light); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+        .amb-badge { background: var(--bg-light); border: 1px solid var(--border-color); padding: 8px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; margin-bottom: 5px;}
         .social-link { display: flex; align-items: center; gap: 10px; padding: 12px; border-radius: 10px; text-decoration: none; color: var(--text-main); font-size: 13px; font-weight: 600; background: var(--bg-light); border: 1px solid var(--border-color); margin-bottom: 4px; }
 
         .smart-footer { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--card-bg); border-top: 1px solid var(--border-color); padding: 12px 0; display: flex; justify-content: space-around; align-items: center; z-index: 900; }
@@ -194,7 +182,6 @@
         .admin-amb-row { display: flex; justify-content: space-between; align-items: center; background: var(--bg-light); padding: 8px 12px; border-radius: 8px; margin-top: 5px; font-size: 12px; }
 
         .section-header-title { font-size: 15px; font-weight: 800; color: var(--primary); margin: 25px 4px 12px 4px; display: flex; align-items: center; gap: 8px; border-right: 4px solid var(--accent); padding-right: 8px; }
-        
         .hidden-admin-trigger { background: transparent; border: none; color: #94a3b8; font-family: 'Cairo'; font-size: 10.5px; text-align: center; width: 100%; padding: 10px; cursor: pointer; opacity: 0.4; transition: opacity 0.2s; font-weight: bold; }
         .hidden-admin-trigger:hover { opacity: 0.9; color: var(--accent); }
     </style>
@@ -305,7 +292,6 @@
                 </div>
             </div>
 
-            <!-- بطاقة بنكك لعرض الحساب مباشرة لتسهيل التحويل للمهدي -->
             <p style="font-size: 11px; font-weight: bold; color: var(--primary); text-align: right; margin-bottom: 6px;"><i class="fa-solid fa-building-columns"></i> حساب التحويل للمبادرة (انقري للنسخ 📋):</p>
             <div class="bankak-digital-card" onclick="copyAccountToClipboardLive('5270255')">
                 <div class="card-top-info">
@@ -523,91 +509,128 @@
         </div>
     </div>
 
-    <script>
+    <!-- ========================================== -->
+    <!-- 🛠️ الخطوة 1: إضافة مكتبات Firebase (Modular SDK) -->
+    <!-- ========================================== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, doc, setDoc, getDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // ==========================================
+        // 🛠️ الخطوة 2: كود التهيئة والإعداد (Configuration)
+        // استبدلي هذه القيم ببيانات مشروعك الحقيقية من لوحة تحكم Firebase
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // مرجع وثيقة التكوين الموحدة داخل الـ Firestore لضمان الحفظ المركزي لجميع الأجهزة
+        const globalDocRef = doc(db, "rafa_initiative", "live_data");
+
+        const DEFAULT_GLOBAL_CASES = [
+            { id: 1, title: "توفير الرسوم الدراسية والجامعية للطلاب من الأسر المتعففة", target: 450000, raised: 150000, completed: false },
+            { id: 2, title: "كفالة صحية وتوفير الأدوية الدورية للأمراض المزمنة وعلاج الأطفال", target: 300000, raised: 200000, completed: false }
+        ];
+        const DEFAULT_GLOBAL_SHARES = [
+            { name: "🌱 سهم دواء", amount: 5000 },
+            { name: "📦 سهم غذاء", amount: 15000 },
+            { name: "🤝 كفالة عائلية", amount: 50000 }
+        ];
+        const DEFAULT_GLOBAL_AMBASSEDORS = ["ميثاق عمر محمود"]; 
+
         let casesData = [];
         let ambassadorsData = [];
         let donationSharesData = [];
         let activeCaseIndexForDonation = null;
         let isAdminAuthenticated = false;
-
         let familyCustomCount = "4 من 20";
         let familyCustomText = "أسرة متعففة كُفلت بالكامل 👥";
 
-        const defaultCases = [
-            { id: 1, title: "توفير الرسوم الدراسية والجامعية للطلاب من الأسر المتعففة", target: 450000, raised: 150000, completed: false },
-            { id: 2, title: "كفالة صحية وتوفير الأدوية الدورية للأمراض المزمنة وعلاج الأطفال", target: 300000, raised: 200000, completed: false }
-        ];
-        const defaultShares = [
-            { name: "🌱 سهم دواء", amount: 5000 },
-            { name: "📦 سهم غذاء", amount: 15000 },
-            { name: "🤝 كفالة عائلية", amount: 50000 }
-        ];
-        const defaultAmbassadors = ["ميثاق عمر محمود"]; 
-
-        function getIconForCase(title) {
+        window.getIconForCase = function(title) {
             if(title.includes('طفلة') || title.includes('علاج') || title.includes('أدوية') || title.includes('صحية')) return 'fa-solid fa-child-holding-heart';
             if(title.includes('الرسوم') || title.includes('الدراسية') || title.includes('الجامعية')) return 'fa-solid fa-graduation-cap';
             return 'fa-solid fa-hand-holding-heart';
         }
 
-        function initApp() {
+        async function initApp() {
             const savedTheme = localStorage.getItem('rafa_theme_preference');
             if(savedTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); }
 
-            const savedCases = localStorage.getItem('rafa_clean_cases_v80');
-            const savedAmbs = localStorage.getItem('rafa_clean_ambs_v80');
-            const savedShares = localStorage.getItem('rafa_clean_shares_v80');
-            const savedFamCount = localStorage.getItem('rafa_family_custom_count');
-            const savedFamText = localStorage.getItem('rafa_family_custom_text');
+            // الاستماع الحي والتلقائي لقاعدة البيانات (Realtime Synchronization)
+            onSnapshot(globalDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    casesData = data.cases || [];
+                    ambassadorsData = data.ambassadors || [];
+                    donationSharesData = data.shares || [];
+                    familyCustomCount = data.familyCount || "4 من 20";
+                    familyCustomText = data.familyText || "أسرة متعففة كُفلت بالكامل 👥";
+                } else {
+                    // إذا كانت قاعدة البيانات فارغة، نرفع البيانات الافتراضية لأول مرة
+                    casesData = [...DEFAULT_GLOBAL_CASES];
+                    ambassadorsData = [...DEFAULT_GLOBAL_AMBASSEDORS];
+                    donationSharesData = [...DEFAULT_GLOBAL_SHARES];
+                    updateFirebaseLive();
+                }
+                
+                if(document.getElementById('adminFamilyCustomCount')) {
+                    document.getElementById('adminFamilyCustomCount').value = familyCustomCount;
+                    document.getElementById('adminFamilyCustomText').value = familyCustomText;
+                }
+                renderComponents();
+            });
 
-            casesData = savedCases ? JSON.parse(savedCases) : [...defaultCases];
-            ambassadorsData = savedAmbs ? JSON.parse(savedAmbs) : [...defaultAmbassadors];
-            donationSharesData = savedShares ? JSON.parse(savedShares) : [...defaultShares];
-            
-            familyCustomCount = savedFamCount ? savedFamCount : "4 من 20";
-            familyCustomText = savedFamText ? savedFamText : "أسرة متعففة كُفلت بالكامل 👥";
-
-            if(document.getElementById('adminFamilyCustomCount')) {
-                document.getElementById('adminFamilyCustomCount').value = familyCustomCount;
-                document.getElementById('adminFamilyCustomText').value = familyCustomText;
-            }
-
-            syncStorage();
-            renderComponents();
             renderPersonalImpactBannerLive();
         }
 
-        function syncStorage() {
-            localStorage.setItem('rafa_clean_cases_v80', JSON.stringify(casesData));
-            localStorage.setItem('rafa_clean_ambs_v80', JSON.stringify(ambassadorsData));
-            localStorage.setItem('rafa_clean_shares_v80', JSON.stringify(donationSharesData));
-            localStorage.setItem('rafa_family_custom_count', familyCustomCount);
-            localStorage.setItem('rafa_family_custom_text', familyCustomText);
+        // دالة موحدة لتحديث السحابة مباشرة عند إجراء أي تعديل
+        async function updateFirebaseLive() {
+            try {
+                await setDoc(globalDocRef, {
+                    cases: casesData,
+                    ambassadors: ambassadorsData,
+                    shares: donationSharesData,
+                    familyCount: familyCustomCount,
+                    familyText: familyCustomText
+                }, { merge: true });
+            } catch (error) {
+                console.error("خطأ في تحديث البيانات السحابية: ", error);
+            }
         }
 
-        function showToastNoticeLive(message) {
+        window.showToastNoticeLive = function(message) {
             const toast = document.getElementById('toastNotice');
-            document.getElementById('toastMessage').innerText = message;
-            toast.classList.add('show');
-            setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            if(toast) {
+                document.getElementById('toastMessage').innerText = message;
+                toast.classList.add('show');
+                setTimeout(() => { toast.classList.remove('show'); }, 3500);
+            }
         }
 
-        function copyAccountToClipboardLive(textNumber) {
+        window.copyAccountToClipboardLive = function(textNumber) {
             navigator.clipboard.writeText(textNumber).then(() => {
                 showToastNoticeLive("تم نسخ رقم الحساب بنجاح، جزاك الله خيراً 🌿");
             }).catch(() => { alert("تم النسخ: " + textNumber); });
         }
 
-        function injectQuickShareAmountLive(amount, name) {
+        window.injectQuickShareAmountLive = function(amount, name) {
             document.getElementById('userDonationAmount').value = amount;
             showToastNoticeLive(`تم اختيار سهم بقيمة ${amount.toLocaleString()} ج (${name}) 💎`);
         }
 
-        function renderPersonalImpactBannerLive() {
+        window.renderPersonalImpactBannerLive = function() {
             const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
             const banner = document.getElementById('personal-impact-banner');
             const obj = document.getElementById('personal-impact-text');
-            if(obj) {
+            if(obj && banner) {
                 if(Number(historyCount) > 0) {
                     obj.innerText = `✨ بفضل الله، لقد ساهمتِ سابقاً في دعم ومساندة وتفريج كربات (${historyCount}) أسر في منصتنا. جزاكِ الله خيراً وضاعف أجركِ! 🌿`;
                     banner.style.display = 'flex';
@@ -615,7 +638,7 @@
             }
         }
 
-        function runAnimateCounterLive(elementId, start, end, duration, suffix = "") {
+        window.runAnimateCounterLive = function(elementId, start, end, duration, suffix = "") {
             const obj = document.getElementById(elementId);
             if (!obj) return;
             if (end === start) { obj.innerText = end.toLocaleString() + suffix; return; }
@@ -630,12 +653,11 @@
             window.requestAnimationFrame(step);
         }
 
-        function switchPageLive(pageId) {
+        window.switchPageLive = function(pageId) {
             if (pageId === 'admin' && !isAdminAuthenticated) {
                 openAdminLockModal();
                 return;
             }
-
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.smart-footer .footer-item').forEach(t => t.classList.remove('active'));
             
@@ -646,7 +668,7 @@
             if(selectedPage) selectedPage.classList.add('active');
             if(selectedTab) selectedTab.classList.add('active');
             
-            bodyWrapper.classList.toggle('home-active', pageId === 'home');
+            if (bodyWrapper) bodyWrapper.classList.toggle('home-active', pageId === 'home');
             
             const indicators = { 'home': 'الرئيسية', 'cases': 'حالات التبرع والمؤشرات', 'gift': 'إهداء وتفريج كربة 🎁', 'admin': 'لوحة تحكم الإدارة ⚙️' };
             if(document.getElementById('page-title-indicator')) {
@@ -678,7 +700,7 @@
             }
         }
 
-        function triggerGiftDonationSubmitLive() {
+        window.triggerGiftDonationSubmitLive = async function() {
             const fromInput = document.getElementById('giftFromNameInput').value.trim();
             const toInput = document.getElementById('giftToNameInput').value.trim();
             const selectObj = document.getElementById('giftCaseSelect');
@@ -689,6 +711,16 @@
             }
 
             const caseName = selectObj.options[selectObj.selectedIndex].text;
+
+            try {
+                const giftId = "gift_" + new Date().getTime();
+                await setDoc(doc(db, "gifts_orders", giftId), {
+                    from: fromInput,
+                    to: toInput,
+                    caseTarget: caseName,
+                    timestamp: new Date().toISOString()
+                });
+            } catch (e) { console.error("خطأ أثناء حفظ طلب الإهداء سحابياً: ", e); }
 
             let waText = `🎁 *طلب كفالة وإصدار بطاقة إهداء - مبادرة رأفة الخيرية* 🕊️\n\n` +
                          `السلام عليكم ورحمة الله وبركاته،\n` +
@@ -704,10 +736,10 @@
             localStorage.setItem('rafa_my_impact_count', historyCount + 1);
 
             window.open(waUrl, '_blank');
-            showToastNoticeLive("تم تجهيز وفتح محادثة الإدارة بالواتساب بنجاح! ✨");
+            showToastNoticeLive("تم حفظ الإهداء سحابياً وتجهيز محادثة الواتساب! ✨");
         }
 
-        function copyGiftShareMessageTextLive() {
+        window.copyGiftShareMessageTextLive = function() {
             const fromInput = document.getElementById('giftFromNameInput').value.trim();
             const toInput = document.getElementById('giftToNameInput').value.trim();
             const selectObj = document.getElementById('giftCaseSelect');
@@ -718,7 +750,6 @@
             }
 
             const caseName = selectObj.options[selectObj.selectedIndex].text;
-
             const message = `🎁 *بيانات بطاقة الإهداء* 🕊️\n\n` +
                             `إلى الغالي/ة العزيز/ة: *${toInput}*\n` +
                             `من قِبل: *${fromInput}*\n\n` +
@@ -730,31 +761,33 @@
             });
         }
 
-        function switchAdminSubTab(subTabId) {
+        window.switchAdminSubTab = function(subTabId) {
             document.querySelectorAll('.admin-sub-page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(`admin-sub-page-${subTabId}`).classList.add('active');
             document.getElementById(`tab-sub-${subTabId}`).classList.add('active');
         }
 
-        function toggleDrawer(open) {
+        window.toggleDrawer = function(open) {
             const drawer = document.getElementById('sideDrawer');
             const overlay = document.getElementById('drawerOverlay');
-            if(open) { drawer.classList.add('open'); overlay.classList.add('open'); }
-            else { drawer.classList.remove('open'); overlay.classList.remove('open'); }
+            if(drawer && overlay) {
+                if(open) { drawer.classList.add('open'); overlay.classList.add('open'); }
+                else { drawer.classList.remove('open'); overlay.classList.remove('open'); }
+            }
         }
 
-        function toggleAmbassadorsDropdown() { document.getElementById('ambassadors-dropdown').classList.toggle('show'); }
-        function toggleContactDropdown() { document.getElementById('contact-dropdown').classList.toggle('show'); }
+        window.toggleAmbassadorsDropdown = function() { document.getElementById('ambassadors-dropdown').classList.toggle('show'); }
+        window.toggleContactDropdown = function() { document.getElementById('contact-dropdown').classList.toggle('show'); }
 
-        function openAdminLockModal() {
+        window.openAdminLockModal = function() {
             toggleDrawer(false);
             document.getElementById('adminPassInput').value = '';
             document.getElementById('adminAuthModal').style.display = 'flex';
         }
-        function closeAdminLockModal() { document.getElementById('adminAuthModal').style.display = 'none'; }
+        window.closeAdminLockModal = function() { document.getElementById('adminAuthModal').style.display = 'none'; }
 
-        function checkAdminPasswordLive() {
+        window.checkAdminPasswordLive = function() {
             const pass = document.getElementById('adminPassInput').value;
             if(pass === "ghsnraafa2026") {
                 isAdminAuthenticated = true;
@@ -764,30 +797,30 @@
             } else { alert("الرمز السري غير صحيح! ❌"); }
         }
 
-        function logoutAdminLive() {
+        window.logoutAdminLive = function() {
             isAdminAuthenticated = false;
             switchPageLive('home');
             showToastNoticeLive("تم قفل لوحة التحكم وتأمين المنصة بنجاح 🔒");
         }
 
-        function renderComponents() {
+        window.renderComponents = function() {
             let totalTarget = casesData.reduce((sum, c) => sum + c.target, 0);
             let totalRaised = casesData.reduce((sum, c) => sum + c.raised, 0);
             let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
             if(globalPct > 100) globalPct = 100;
 
-            document.getElementById('global-collected-text').innerText = totalRaised.toLocaleString() + " ج";
-            document.getElementById('global-target-text').innerText = totalTarget.toLocaleString() + " ج";
-            document.getElementById('global-live-bar').style.width = globalPct + "%";
-            document.getElementById('global-pct-text').innerText = `${globalPct}%`;
-            
-            document.getElementById('families-raised-count').innerText = `${familyCustomCount} ${familyCustomText}`;
+            if(document.getElementById('global-collected-text')) document.getElementById('global-collected-text').innerText = totalRaised.toLocaleString() + " ج";
+            if(document.getElementById('global-target-text')) document.getElementById('global-target-text').innerText = totalTarget.toLocaleString() + " ج";
+            if(document.getElementById('global-live-bar')) document.getElementById('global-live-bar').style.width = globalPct + "%";
+            if(document.getElementById('global-pct-text')) document.getElementById('global-pct-text').innerText = `${globalPct}%`;
+            if(document.getElementById('families-raised-count')) document.getElementById('families-raised-count').innerText = `${familyCustomCount} ${familyCustomText}`;
 
             const container = document.getElementById('cases-container');
             const archiveContainer = document.getElementById('cases-archive-container');
             const giftSelect = document.getElementById('giftCaseSelect');
 
-            container.innerHTML = ''; archiveContainer.innerHTML = '';
+            if(container) container.innerHTML = ''; 
+            if(archiveContainer) archiveContainer.innerHTML = '';
             if(giftSelect) giftSelect.innerHTML = '';
 
             let activeCount = 0; let archiveCount = 0;
@@ -799,7 +832,8 @@
 
                 if (!c.completed) {
                     activeCount++;
-                    container.innerHTML += `
+                    if(container) {
+                        container.innerHTML += `
                         <div class="luxury-card">
                             <div class="card-header-ui">
                                 <div class="case-icon-wrapper">
@@ -823,13 +857,15 @@
                             </div>
                             <button class="btn-luxury-action" onclick="openDonationModal(${index})">ساهم في تفريج كربتهم <i class="fa-solid fa-arrow-left"></i></button>
                         </div>`;
+                    }
                     
                     if(giftSelect) {
                         giftSelect.innerHTML += `<option value="${index}">ملف: ${c.title}</option>`;
                     }
                 } else {
                     archiveCount++;
-                    archiveContainer.innerHTML += `
+                    if(archiveContainer) {
+                        archiveContainer.innerHTML += `
                         <div class="luxury-card" style="opacity: 0.95; border-right: 5px solid #10b981;">
                             <div class="card-header-ui">
                                 <div class="case-icon-wrapper">
@@ -845,14 +881,17 @@
                             </div>
                             <button class="btn-luxury-action btn-completed-shimmer"><i class="fa-solid fa-circle-check"></i> اكتملت الحالة جزاكم الله خيراً</button>
                         </div>`;
+                    }
                 }
             });
 
-            if(activeCount === 0) {
+            if(activeCount === 0 && container) {
                 container.innerHTML = `<p style="text-align:center; color:var(--text-sub); padding:30px; font-size:13px;">لا توجد حالات جارية حالياً، انتظرونا قريباً ✨</p>`;
                 if(giftSelect) giftSelect.innerHTML = `<option value="">لا توجد ملفات جارية حالياً</option>`;
             }
-            document.getElementById('archive-section-title').style.display = archiveCount > 0 ? 'flex' : 'none';
+            if(document.getElementById('archive-section-title')) {
+                document.getElementById('archive-section-title').style.display = archiveCount > 0 ? 'flex' : 'none';
+            }
 
             const sharesBtnContainer = document.getElementById('live-shares-buttons-container');
             if(sharesBtnContainer) {
@@ -910,25 +949,25 @@
             }
         }
 
-        function saveCustomFamilyConfigLive() {
+        window.saveCustomFamilyConfigLive = function() {
             const countInput = document.getElementById('adminFamilyCustomCount').value.trim();
             const textInput = document.getElementById('adminFamilyCustomText').value.trim();
             if(!countInput || !textInput) { alert("⚠️ فضلاً، الحقول لا يمكن أن تكون فارغة."); return; }
             familyCustomCount = countInput; familyCustomText = textInput;
-            syncStorage(); renderComponents();
-            showToastNoticeLive("تم حفظ وتحديث عبارة الكفالة بنجاح! 🎉");
+            updateFirebaseLive();
+            showToastNoticeLive("تم حفظ وتحديث عبارة الكفالة سحابياً! 🎉");
         }
 
-        function openQuickCashModalLive(index) {
+        window.openQuickCashModalLive = function(index) {
             document.getElementById('quickCashCaseIndex').value = index;
             document.getElementById('quickCashTitleLabel').innerText = `الملف: ${casesData[index].title}`;
             document.getElementById('quickCashAmountInput').value = '';
             document.getElementById('quickCashModal').style.display = 'flex';
         }
 
-        function closeQuickCashModal() { document.getElementById('quickCashModal').style.display = 'none'; }
+        window.closeQuickCashModal = function() { document.getElementById('quickCashModal').style.display = 'none'; }
 
-        function submitQuickCashLive() {
+        window.submitQuickCashLive = function() {
             const idx = Number(document.getElementById('quickCashCaseIndex').value);
             const cashAmount = Number(document.getElementById('quickCashAmountInput').value);
             if (cashAmount <= 0 || !cashAmount) { alert("⚠️ يرجى إدخال مبلغ صحيح أكبر من الصفر."); return; }
@@ -938,28 +977,28 @@
                 casesData[idx].completed = true;
                 showToastNoticeLive("تم اكتمال ملف الحالة تلقائياً ونقله للحصاد! 🎉");
             } else { showToastNoticeLive(`تمت إضافة ${cashAmount.toLocaleString()} ج للملف بنجاح وتحديث النسب! 🌿`); }
-            syncStorage(); renderComponents(); closeQuickCashModal();
+            updateFirebaseLive(); closeQuickCashModal();
         }
 
-        function addNewDonationShareLive() {
+        window.addNewDonationShareLive = function() {
             const nameInput = document.getElementById('newShareName');
             const amtInput = document.getElementById('newShareAmt');
             const name = nameInput.value.trim(); const amt = Number(amtInput.value);
             if (name && amt > 0) {
                 donationSharesData.push({ name: name, amount: amt });
-                syncStorage(); renderComponents();
+                updateFirebaseLive();
                 nameInput.value = ''; amtInput.value = '';
                 showToastNoticeLive("تم إضافة سهم التبرع بنجاح! 🚀");
             } else { alert("⚠️ يرجى تعبئة الحقول بشكل صحيح."); }
         }
 
-        function deleteDonationShareLive(idx) {
+        window.deleteDonationShareLive = function(idx) {
             if(confirm("هل تريدين حذف سهم التبرع هذا نهائياً؟")) {
-                donationSharesData.splice(idx, 1); syncStorage(); renderComponents();
+                donationSharesData.splice(idx, 1); updateFirebaseLive();
             }
         }
 
-        function generateWhatsAppReportLive() {
+        window.generateWhatsAppReportLive = function() {
             let totalTarget = casesData.reduce((sum, c) => sum + c.target, 0);
             let totalRaised = casesData.reduce((sum, c) => sum + c.raised, 0);
             let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
@@ -980,19 +1019,28 @@
             navigator.clipboard.writeText(report).then(() => { alert("📋 تم نسخ التقرير المالي بنجاح لقروبات الواتساب!"); });
         }
 
-        function openDonationModal(index) {
+        window.openDonationModal = function(index) {
             activeCaseIndexForDonation = index;
             document.getElementById('userDonationAmount').value = ''; 
             document.getElementById('donationModalTitle').innerText = `تقديم مساهمة لـ:\n ${casesData[index].title}`;
             document.getElementById('donationModal').style.display = 'flex';
         }
 
-        function processDonationLive() {
+        window.processDonationLive = async function() {
             const amtInput = document.getElementById('userDonationAmount');
             const amt = Number(amtInput.value);
             if(!amt || amt <= 0) { alert("⚠️ فضلاً، أدخلي مبلغ تبرع صحيح أولاً."); return; }
 
             const selectedCase = casesData[activeCaseIndexForDonation];
+
+            try {
+                const txId = "tx_" + new Date().getTime();
+                await setDoc(doc(db, "donations_transactions", txId), {
+                    caseTitle: selectedCase.title,
+                    amount: amt,
+                    timestamp: new Date().toISOString()
+                });
+            } catch (e) { console.error("خطأ التخزين السحابي: ", e); }
 
             let waText = `✨ *إشعار مساهمة جديدة - مبادرة رأفة الخيرية* ✨\n\n` +
                          `السلام عليكم ورحمة الله وبركاته،\n` +
@@ -1003,7 +1051,6 @@
                          `جزاكم الله خيراً؛`;
 
             const waUrl = `https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)}`;
-            
             let historyCount = Number(localStorage.getItem('rafa_my_impact_count') || 0);
             localStorage.setItem('rafa_my_impact_count', historyCount + 1);
 
@@ -1012,10 +1059,10 @@
             window.open(waUrl, '_blank');
         }
 
-        function closeDonationModal() { document.getElementById('donationModal').style.display = 'none'; }
-        function closeThankYouModal() { document.getElementById('thankYouModal').style.display = 'none'; renderPersonalImpactBannerLive(); }
+        window.closeDonationModal = function() { document.getElementById('donationModal').style.display = 'none'; }
+        window.closeThankYouModal = function() { document.getElementById('thankYouModal').style.display = 'none'; renderPersonalImpactBannerLive(); }
         
-        function copyAppUrlToShareLive() {
+        window.copyAppUrlToShareLive = function() {
             const currentActiveCasesNames = casesData.filter(c => !c.completed).map(c => `• ${c.title}`).join('\n');
             const shareText = `🕊️ *مبادرة رأفة الخيرية | كفالة الأسر المتعففة* 🌿\n\n` +
                               `ندعوكم للمساهمة معنا في سد حوائج العون الطبي والغذائي والدراسي للأسر المتعففة وعلاج الأطفال.\n\n` +
@@ -1030,7 +1077,7 @@
             });
         }
 
-        function openEditCaseModalLive(index) {
+        window.openEditCaseModalLive = function(index) {
             document.getElementById('editCaseIndex').value = index;
             document.getElementById('editCaseTitle').value = casesData[index].title;
             document.getElementById('editCaseRaised').value = casesData[index].raised;
@@ -1038,7 +1085,7 @@
             document.getElementById('editCaseModal').style.display = 'flex';
         }
 
-        function saveCaseEditsLive() {
+        window.saveCaseEditsLive = function() {
             const idx = Number(document.getElementById('editCaseIndex').value);
             const newTitle = document.getElementById('editCaseTitle').value.trim();
             const newRaised = Number(document.getElementById('editCaseRaised').value);
@@ -1052,68 +1099,79 @@
             casesData[idx].target = newTarget;
             casesData[idx].completed = (newRaised >= newTarget);
             
-            syncStorage(); 
-            renderComponents(); 
+            updateFirebaseLive(); 
             closeEditModal();
-            showToastNoticeLive("💾 تم حفظ وتحديث كافة بيانات الملف الخيري بنجاح!");
+            showToastNoticeLive("💾 تم حفظ وتحديث كافة بيانات الملف الخيري سحابياً!");
         }
 
-        function closeEditModal() { document.getElementById('editCaseModal').style.display = 'none'; }
+        window.closeEditModal = function() { document.getElementById('editCaseModal').style.display = 'none'; }
 
-        function markCaseCompletedLive(index) {
+        window.markCaseCompletedLive = function(index) {
             if(confirm(`هل تريدين نقل ملف "${casesData[index].title}" إلى أرشيف الحصاد المكتمل كُلياً؟`)) {
                 casesData[index].raised = casesData[index].target;
                 casesData[index].completed = true;
-                syncStorage(); renderComponents();
+                updateFirebaseLive();
             }
         }
 
-        function deleteCaseLive(index) {
-            if(confirm(`حذف هذه الحالة نهائياً؟`)) { casesData.splice(index, 1); syncStorage(); renderComponents(); }
+        window.deleteCaseLive = function(index) {
+            if(confirm(`حذف هذه الحالة نهائياً؟`)) { casesData.splice(index, 1); updateFirebaseLive(); }
         }
 
-        function addNewCaseLive() {
+        window.addNewCaseLive = function() {
             const title = document.getElementById('newCaseTitle').value.trim();
             const target = Number(document.getElementById('newCaseTarget').value);
             if(title && target > 0) {
                 casesData.push({ id: casesData.length + 1, title: title, target: target, raised: 0, completed: false });
-                syncStorage(); renderComponents();
+                updateFirebaseLive();
                 document.getElementById('newCaseTitle').value = '';
                 document.getElementById('newCaseTarget').value = '';
-                alert("🚀 تم النشر بنجاح!");
+                alert("🚀 تم النشر سحابياً بنجاح!");
                 switchAdminSubTab('view');
             }
         }
 
-        function addAmbassadorLive() {
+        window.addAmbassadorLive = function() {
             const input = document.getElementById('newAmbInput');
             const name = input.value.trim();
-            if(name) { ambassadorsData.push(name); syncStorage(); renderComponents(); input.value = ''; }
+            if(name) { ambassadorsData.push(name); updateFirebaseLive(); input.value = ''; }
         }
 
-        function deleteAmbassadorLive(idx) {
-            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { ambassadorsData.splice(idx, 1); syncStorage(); renderComponents(); }
+        window.deleteAmbassadorLive = function(idx) {
+            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { ambassadorsData.splice(idx, 1); updateFirebaseLive(); }
         }
 
-        function openVolunteerModal() { document.getElementById('volunteerModal').style.display = 'flex'; }
-        function closeVolunteerModal() { document.getElementById('volunteerModal').style.display = 'none'; }
+        window.openVolunteerModal = function() { document.getElementById('volunteerModal').style.display = 'flex'; }
+        window.closeVolunteerModal = function() { document.getElementById('volunteerModal').style.display = 'none'; }
         
-        function submitVolunteerLive() {
+        window.submitVolunteerLive = async function() {
             const name = document.getElementById('vName').value.trim();
             const gender = document.getElementById('vGender').value;
             const phone = document.getElementById('vPhone').value.trim();
             if(name.split(/\s+/).length < 3 || !gender || !phone) { alert("⚠️ فضلاً، يرجى تعبئة كافة الحقول والاسم ثلاثي."); return; }
+            
+            try {
+                const volId = "vol_" + new Date().getTime();
+                await setDoc(doc(db, "volunteers_applications", volId), {
+                    fullName: name,
+                    gender: gender,
+                    phone: phone,
+                    status: "pending",
+                    timestamp: new Date().toISOString()
+                });
+            } catch (err) { console.error("خطأ أثناء حفظ طلب التطوع: ", err); }
+
             const text = `طلب انضمام جديد لسفراء الخير:\nالاسم: ${name}\nالجنس: ${gender}\nالهاتف: ${phone}`;
             window.open(`https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(text)}`, '_blank');
             closeVolunteerModal();
         }
 
-        function toggleThemeLive() {
-            const doc = document.documentElement;
-            if(doc.getAttribute('data-theme') === 'dark') {
-                doc.removeAttribute('data-theme'); localStorage.setItem('rafa_theme_preference', 'light');
+        window.toggleThemeLive = function() {
+            const docEl = document.documentElement;
+            if(docEl.getAttribute('data-theme') === 'dark') {
+                docEl.removeAttribute('data-theme'); localStorage.setItem('rafa_theme_preference', 'light');
             } else {
-                doc.setAttribute('data-theme', 'dark'); localStorage.setItem('rafa_theme_preference', 'dark');
+                docEl.setAttribute('data-theme', 'dark'); localStorage.setItem('rafa_theme_preference', 'dark');
             }
         }
 
