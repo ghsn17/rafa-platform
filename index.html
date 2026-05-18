@@ -1089,7 +1089,7 @@
             const newRaised = Number(document.getElementById('editCaseRaised').value);
             const newTarget = Number(document.getElementById('editCaseTarget').value);
 
-            if(!newTitle) { alert("⚠️ لا يمكن ترك عنوان ملف الحالة فارغاً."); return; }
+            if(!newTitle) { alert("⚠️ لا يمكن ترك عنوان ملف حالة فارغاً."); return; }
             if(newTarget <= 0 || newRaised < 0) { alert("⚠️ يرجى التأكد من إدخال مبالغ مالية صحيحة."); return; }
 
             casesData[idx].title = newTitle;
@@ -1120,7 +1120,8 @@
             const title = document.getElementById('newCaseTitle').value.trim();
             const target = Number(document.getElementById('newCaseTarget').value);
             if(title && target > 0) {
-                casesData.push({ id: casesData.length + 1, title: title, target: target, raised: 0, completed: false });
+                // التعديل هنا: توليد معرف فريد يعتمد على الوقت لمنع اختفاء الحالة وتثبيتها سحابياً
+                casesData.push({ id: Date.now(), title: title, target: target, raised: 0, completed: false });
                 updateFirebaseLive();
                 document.getElementById('newCaseTitle').value = '';
                 document.getElementById('newCaseTarget').value = '';
