@@ -158,12 +158,10 @@
             margin: 20px 0;
             font-family: 'Tajawal', sans-serif;
         }
-        /* الزخرفة الإسلامية العلوية على شكل خلفية ناعمة */
         .gift-card-preview-canvas::before {
             content: '\f621'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
             position: absolute; top: 15px; left: 15px; font-size: 80px; color: rgba(214,175,55,0.03); transform: rotate(0deg);
         }
-        /* علامة الصح الناعمة المعتمدة في التصميم الأصلي */
         .gift-card-preview-canvas::after {
             content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
             position: absolute; top: 25px; left: 25px; font-size: 55px; color: rgba(255,255,255,0.03);
@@ -210,7 +208,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            text-align: right; /* محاذاة البيانات لليمين لتطابق شكل الجدول الساق */
+            text-align: right;
         }
         .gift-name-tag { 
             font-size: 1rem;
@@ -233,7 +231,6 @@
             border-right: 4px solid var(--gold-accent) !important;
             margin-top: 4px !important;
         }
-        /* النجمة/الأيقونة الزخرفية السفلية في البطاقة */
         .gift-name-tag:last-child::before {
             content: '*'; color: #ef4444; font-size: 18px; font-weight: bold; margin-left: 2px;
         }
@@ -432,7 +429,7 @@
                 <div class="gift-header-badge">مبادرة رأفة الخيرية</div>
                 <div class="gift-main-title">🌿 بِطَاقَةُ إِهْدَاءٍ مِنَ القَلْب 🕊️</div>
                 <div class="gift-body-message" id="canvasMessageBodyText">
-                    حبّاً وإحساناً مني، لقد تبرعتُ باسمكم الكريم وأودعتُ في رصيد آخرتكم أثراً لا يزول.. فلأنكم غاليون على قلبي، ولأن الهدايا تفنى وأجر الصدقة يبقى ويُربى؛ أحببتُ أن أترجم معزّتي ومحبتي لكم في هذه الدنيا إلى غراسٍ طاهر، يسعد قلباً أضناه التعب ويرسم بسمة كان يرجوها محتاج، عبر كفالة وتفريج كربة أسر متعففة في مشاريع مبادرة. سألتُ الله المنان أن يتقبّل هذا البذل، ويجعله صدقة جارية تصحبكم في دروبكم، وتُكتب في صحائفكم نوراً وضياءً وظلّاً ليلاً يوم نلقاه، بارك الله في عمركم وأدام وجوهكم طيباً معطاءً.
+                    أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية.
                 </div>
                 <div class="gift-names-row">
                     <div class="gift-name-tag">المهدى إليه: <span id="canvasToText">[اسم المُهدى إليه]</span></div>
@@ -464,7 +461,7 @@
                     <button class="btn-action" style="background:#ef4444; padding:4px 10px; font-size:11px;" onclick="logoutAdminLive()">🔐 قفل اللوحة</button>
                 </div>
 
-                <button class="btn-luxury-action" style="background: #15803d; border-radius: 14px; margin-bottom: 16px; font-size: 12px;" onclick="generateWhatsAppReportLive()">
+                <button class="btn-luxury-action" style="background: #15803d; border-radius: 14px; margin-bottom: 166px; font-size: 12px;" onclick="generateWhatsAppReportLive()">
                     <i class="fa-regular fa-clipboard"></i> 📋 نسخ تقرير الموقف العام للقرابات
                 </button>
 
@@ -642,14 +639,17 @@
     </div>
 
     <script>
+        // رابط الخادم السحابي المجاني المخصص لمنصتك
+        const CLOUD_API_URL = "https://api.myjson.online/v1/records/481f185d-8302-4d1d-adcb-bc0fc7b6bfa8";
+
         let casesData = [];
         let ambassadorsData = [];
         let donationSharesData = [];
-        let activeCaseIndexForDonation = null;
-        let isAdminAuthenticated = false;
-
         let familyCustomCount = "4 من 20";
         let familyCustomText = "أسرة متعففة كُفلت بالكامل 👥";
+        
+        let activeCaseIndexForDonation = null;
+        let isAdminAuthenticated = false;
 
         const defaultCases = [
             { id: 1, title: "توفير الرسوم الدراسية والجامعية للطلاب من الأسر المتعففة", target: 450000, raised: 150000, completed: false },
@@ -668,37 +668,62 @@
             return 'fa-solid fa-hand-holding-heart';
         }
 
-        function initApp() {
+        // دالة جلب البيانات من السحابة فور فتح أي جوال للموقع
+        async function initApp() {
             const savedTheme = localStorage.getItem('rafa_theme_preference');
             if(savedTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); }
 
-            const savedCases = localStorage.getItem('rafa_clean_cases_v80');
-            const savedAmbs = localStorage.getItem('rafa_clean_ambs_v80');
-            const savedShares = localStorage.getItem('rafa_clean_shares_v80');
-            const savedFamCount = localStorage.getItem('rafa_family_custom_count');
-            const savedFamText = localStorage.getItem('rafa_family_custom_text');
+            // إعداد أولي افتراضي لحين انتهاء التحميل السحابي
+            casesData = [...defaultCases];
+            ambassadorsData = [...defaultAmbassadors];
+            donationSharesData = [...defaultShares];
 
-            casesData = savedCases ? JSON.parse(savedCases) : [...defaultCases];
-            ambassadorsData = savedAmbs ? JSON.parse(savedAmbs) : [...defaultAmbassadors];
-            donationSharesData = savedShares ? JSON.parse(savedShares) : [...defaultShares];
-            
-            familyCustomCount = savedFamCount ? savedFamCount : "4 من 20";
-            familyCustomText = savedFamText ? savedFamText : "أسرة متعففة كُفلت بالكامل 👥";
+            renderComponents();
+
+            try {
+                const response = await fetch(CLOUD_API_URL);
+                if (response.ok) {
+                    const resData = await response.json();
+                    if (resData && resData.data) {
+                        const cloud = resData.data;
+                        if (cloud.cases) casesData = cloud.cases;
+                        if (cloud.ambassadors) ambassadorsData = cloud.ambassadors;
+                        if (cloud.shares) donationSharesData = cloud.shares;
+                        if (cloud.familyCount) familyCustomCount = cloud.familyCount;
+                        if (cloud.familyText) familyCustomText = cloud.familyText;
+                    }
+                }
+            } catch (error) {
+                console.log("العمل في وضع الأوفلاين الاحتياطي:", error);
+            }
 
             if(document.getElementById('adminFamilyCustomCount')) document.getElementById('adminFamilyCustomCount').value = familyCustomCount;
             if(document.getElementById('adminFamilyCustomText')) document.getElementById('adminFamilyCustomText').value = familyCustomText;
 
-            syncStorage();
             renderComponents();
             renderPersonalImpactBannerLive();
         }
 
-        function syncStorage() {
-            localStorage.setItem('rafa_clean_cases_v80', JSON.stringify(casesData));
-            localStorage.setItem('rafa_clean_ambs_v80', JSON.stringify(ambassadorsData));
-            localStorage.setItem('rafa_clean_shares_v80', JSON.stringify(donationSharesData));
-            localStorage.setItem('rafa_family_custom_count', familyCustomCount);
-            localStorage.setItem('rafa_family_custom_text', familyCustomText);
+        // دالة رفع وحفظ التعديلات يرسلها جوالك مباشرة للسحابة لتبهر الجميع بالحديث الفوري
+        async function syncCloudStorage() {
+            const payload = {
+                data: {
+                    cases: casesData,
+                    ambassadors: ambassadorsData,
+                    shares: donationSharesData,
+                    familyCount: familyCustomCount,
+                    familyText: familyCustomText
+                }
+            };
+            try {
+                await fetch(CLOUD_API_URL, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error("خطأ في تحديث البيانات سحابياً:", error);
+            }
         }
 
         function showToastNoticeLive(message) {
@@ -803,7 +828,6 @@
             updateGiftCardCanvasLive();
         }
 
-        /* دالة التحديث اللحظي للبطاقة الأولى الزيتية المعتمدة بنصها الجديد */
         function updateGiftCardCanvasLive() {
             const selectObj = document.getElementById('giftCaseSelect');
             const fromInput = document.getElementById('giftFromNameInput').value.trim();
@@ -818,7 +842,6 @@
             document.getElementById('canvasFromText').innerText = fromText;
             document.getElementById('canvasToText').innerText = toText;
             
-            // دمج اسم الحالة الفعلي في النص المعتمد بشكل تلقائي
             const targetContainer = document.querySelector('.gift-names-row .gift-name-tag:last-child span');
             if(targetContainer) {
                 targetContainer.innerText = `المصرف الخيري لمشروع: ${caseText}`;
@@ -845,7 +868,7 @@
             }
 
             if(radioType === 'custom' && !customText) {
-                alert("⚠️ لقد اخترتِ كتابة دعوتكِ بنفسكِ، يرجى ملء حقل نص الدعوة بالأعلى أولاً.");
+                alert("⚠️ لقَد اخترتِ كتابة دعوتكِ بنفسكِ، يرجى ملء حقل نص الدعوة بالأعلى أولاً.");
                 return;
             }
 
@@ -990,7 +1013,7 @@
                                         <span style="color:var(--text-sub);">نسبة الدعم والوصول</span>
                                         <span style="color:var(--primary); font-size:13px; font-weight:800;">${pct}%</span>
                                     </div>
-                                    <div class="luxury-bar-outer"><div class="luxury-bar-inner individual-inner-bar" data-pct="${pct}" style="width: 0%;"></div></div>
+                                    <div class="luxury-bar-outer"><div class="luxury-bar-inner individual-inner-bar" data-pct="${pct}" style="width: ${pct}%;"></div></div>
                                 </div>
                                 <div class="stats-row-ui">
                                     <div class="stat-item-ui"><span class="label">المبلغ المدفوع (المجموع)</span><span class="value" style="color:#10b981;">${c.raised.toLocaleString()} ج</span></div>
@@ -1098,7 +1121,8 @@
             const textInput = document.getElementById('adminFamilyCustomText').value.trim();
             if(!countInput || !textInput) { alert("⚠️ فضلاً، الحقول لا يمكن أن تكون فارغة."); return; }
             familyCustomCount = countInput; familyCustomText = textInput;
-            syncStorage(); renderComponents();
+            renderComponents();
+            syncCloudStorage();
             showToastNoticeLive("تم حفظ وتحديث عبارة الكفالة بنجاح! 🎉");
         }
 
@@ -1121,7 +1145,8 @@
                 casesData[idx].completed = true;
                 showToastNoticeLive("تم اكتمال ملف الحالة تلقائياً ونقله للحصاد! 🎉");
             } else { showToastNoticeLive(`تمت إضافة ${cashAmount.toLocaleString()} ج للملف بنجاح وتحديث النسب! 🌿`); }
-            syncStorage(); renderComponents(); closeQuickCashModal();
+            renderComponents(); closeQuickCashModal();
+            syncCloudStorage(); 
         }
 
         function addNewDonationShareLive() {
@@ -1130,15 +1155,17 @@
             const name = nameInput.value.trim(); const amt = Number(amtInput.value);
             if (name && amt > 0) {
                 donationSharesData.push({ name: name, amount: amt });
-                syncStorage(); renderComponents();
+                renderComponents();
                 nameInput.value = ''; amtInput.value = '';
                 showToastNoticeLive("تم إضافة سهم التبرع بنجاح! 🚀");
+                syncCloudStorage();
             } else { alert("⚠️ يرجى تعبئة الحقول بشكل صحيح."); }
         }
 
         function deleteDonationShareLive(idx) {
             if(confirm("هل تريدين حذف سهم التبرع هذا نهائياً؟")) {
-                donationSharesData.splice(idx, 1); syncStorage(); renderComponents();
+                donationSharesData.splice(idx, 1); renderComponents();
+                syncCloudStorage();
             }
         }
 
@@ -1229,8 +1256,9 @@
                 casesData[idx].raised = newRaised;
                 casesData[idx].target = newTarget;
                 casesData[idx].completed = (newRaised >= newTarget);
-                syncStorage(); renderComponents(); closeEditModal();
-                alert("💾 تم حفظ التعديلات!");
+                renderComponents(); closeEditModal();
+                syncCloudStorage();
+                alert("💾 تم حفظ التعديلات ونشرها سحابياً لجميع الهواتف!");
             }
         }
 
@@ -1240,12 +1268,17 @@
             if(confirm(`هل تريدين نقل ملف "${casesData[index].title}" إلى أرشيف الحصاد المكتمل كُلياً؟`)) {
                 casesData[index].raised = casesData[index].target;
                 casesData[index].completed = true;
-                syncStorage(); renderComponents();
+                renderComponents();
+                syncCloudStorage();
             }
         }
 
         function deleteCaseLive(index) {
-            if(confirm(`حذف هذه الحالة نهائياً؟`)) { casesData.splice(index, 1); syncStorage(); renderComponents(); }
+            if(confirm(`حذف هذه الحالة نهائياً؟`)) { 
+                casesData.splice(index, 1); 
+                renderComponents(); 
+                syncCloudStorage();
+            }
         }
 
         function addNewCaseLive() {
@@ -1253,22 +1286,32 @@
             const target = Number(document.getElementById('newCaseTarget').value);
             if(title && target > 0) {
                 casesData.push({ id: casesData.length + 1, title: title, target: target, raised: 0, completed: false });
-                syncStorage(); renderComponents();
+                renderComponents();
                 document.getElementById('newCaseTitle').value = '';
                 document.getElementById('newCaseTarget').value = '';
-                alert("🚀 تم النشر بنجاح!");
+                alert("🚀 تم النشر سحابياً بنجاح لكل الجوالات!");
                 switchAdminSubTab('view');
+                syncCloudStorage();
             }
         }
 
         function addAmbassadorLive() {
             const input = document.getElementById('newAmbInput');
             const name = input.value.trim();
-            if(name) { ambassadorsData.push(name); syncStorage(); renderComponents(); input.value = ''; }
+            if(name) { 
+                ambassadorsData.push(name); 
+                renderComponents(); 
+                input.value = ''; 
+                syncCloudStorage();
+            }
         }
 
         function deleteAmbassadorLive(idx) {
-            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { ambassadorsData.splice(idx, 1); syncStorage(); renderComponents(); }
+            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { 
+                ambassadorsData.splice(idx, 1); 
+                renderComponents(); 
+                syncCloudStorage();
+            }
         }
 
         function openVolunteerModal() { document.getElementById('volunteerModal').style.display = 'flex'; }
