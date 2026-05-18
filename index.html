@@ -214,8 +214,8 @@
                 <i class="fa-solid fa-chevron-down" id="contact-dropdown-icon" style="font-size: 11px;"></i>
             </button>
             <div class="drawer-dropdown-content" id="contact-dropdown">
-                <a href="https://wa.me/249904284874" target="_blank" class="social-link" style="margin-top: 5px;"><i class="fa-brands fa-whatsapp" style="color:#25d366; font-size:18px;"></i> الواتساب الرسمي للمبادرة</a>
-                <a href="https://www.facebook.com/share/1941knMQst/?mibextid=wwXIfr" target="_blank" class="social-link"><i class="fa-brands fa-facebook" style="color:#1877f2; font-size:18px;"></i> صفحة الفيسبوكان الرسمية</a>
+                <a href="https://wa.me/249904284874" target="_blank" class="social-link" style="margin-top: 5px; color: #25d366; font-size: 16px;"><i class="fa-brands fa-whatsapp" style="font-size:18px;"></i> الواتساب الرسمي للمبادرة</a>
+                <a href="https://www.facebook.com/share/1941knMQst/?mibextid=wwXIfr" target="_blank" class="social-link"><i class="fa-brands fa-facebook" style="color:#1877f2; font-size:18px;"></i> صفحة الفيسبوك الرسمية</a>
                 <a href="https://chat.whatsapp.com/E5kuD9faY9A9hP4ePIEM4s?mode=gi_t" target="_blank" class="social-link"><i class="fa-solid fa-users" style="color:var(--accent); font-size:16px;"></i> رابط مجتمع المبادرة الرسمي</a>
             </div>
         </div>
@@ -577,8 +577,11 @@
                     updateFirebaseLive();
                 }
                 
-                if(document.getElementById('adminFamilyCustomCount')) {
+                // إضافة فحص منع تصفير المدخلات أثناء كتابة المشرف في لوحة التحكم
+                if(document.getElementById('adminFamilyCustomCount') && document.activeElement !== document.getElementById('adminFamilyCustomCount')) {
                     document.getElementById('adminFamilyCustomCount').value = familyCustomCount;
+                }
+                if(document.getElementById('adminFamilyCustomText') && document.activeElement !== document.getElementById('adminFamilyCustomText')) {
                     document.getElementById('adminFamilyCustomText').value = familyCustomText;
                 }
                 renderComponents();
