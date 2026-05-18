@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -66,8 +65,8 @@
         .home-hero h1 { font-size: 28px; font-weight: 800; color: white; margin-bottom: 16px; }
         .home-hero .prose-description { font-size: 14px; color: rgba(255, 255, 255, 0.95); line-height: 1.8; font-weight: 500; text-align: justify; max-width: 580px; margin: 0 auto; opacity: 0; animation: textFadeIn 1s ease-out forwards; animation-delay: 0.2s; }
         @keyframes textFadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-
-.welcome-content { max-width: 650px; margin: 0 auto; }
+        
+        .welcome-content { max-width: 650px; margin: 0 auto; }
         .hadith-card { background: var(--card-bg); padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.01); text-align: justify; line-height: 1.8; font-weight: 600; color: var(--text-main); border: 1px solid var(--border-color); border-right: 5px solid var(--primary); margin-bottom: 20px; }
 
         .impact-tracker-banner { background: linear-gradient(135deg, rgba(212, 178, 53, 0.15) 0%, rgba(71, 96, 79, 0.08) 100%); border: 1px solid var(--accent); border-radius: 16px; padding: 14px; margin-bottom: 25px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(214, 178, 53, 0.08); }
@@ -106,7 +105,7 @@
         .btn-luxury-action { background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 13px; border-radius: 100px; text-decoration: none; font-weight: 700; font-size: 14px; border: none; cursor: pointer; width: 100%; transition: background 0.2s; position: relative; overflow: hidden; }
         .btn-luxury-action:hover { background: var(--primary-dark); }
 
-.btn-completed-shimmer { background: #47604f !important; cursor: default; }
+        .btn-completed-shimmer { background: #47604f !important; cursor: default; }
         .btn-completed-shimmer::after {
             content: ''; position: absolute; top: -50%; left: -60%; width: 30%; height: 200%;
             background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0) 100%);
@@ -142,7 +141,7 @@
 
         .modal-actions-group { display: flex; flex-direction: column; gap: 8px; }
 
-.toast-notice { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; color: #ffffff; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 2000; opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px; }
+        .toast-notice { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(20px); background: #1e293b; color: #ffffff; padding: 12px 24px; border-radius: 50px; font-size: 13px; font-weight: 700; z-index: 2000; opacity: 0; transition: all 0.3s ease; pointer-events: none; display: flex; align-items: center; gap: 8px; }
         .toast-notice.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
         /* تصميم كرت الإهداء الرقمي المعتمد والأول بالخلفية الزيتية الفخمة */
@@ -235,8 +234,7 @@
             margin-top: 4px !important;
         }
         /* النجمة/الأيقونة الزخرفية السفلية في البطاقة */
-
-.gift-name-tag:last-child::before {
+        .gift-name-tag:last-child::before {
             content: '*'; color: #ef4444; font-size: 18px; font-weight: bold; margin-left: 2px;
         }
         .gift-name-tag:last-child span {
@@ -286,9 +284,7 @@
         .drawer-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 1050; display: none; }
         .drawer-overlay.open { display: block; }
         
-        .drawer-accordion-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px; background: var(--card-sub-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-family: 'Cairo'; font-weight: 700; font-size: 14px; cursor:
-
-pointer; margin-bottom: 10px; }
+        .drawer-accordion-btn { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 12px; background: var(--card-sub-bg); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-main); font-family: 'Cairo'; font-weight: 700; font-size: 14px; cursor: pointer; margin-bottom: 10px; }
         .drawer-dropdown-content { display: none; flex-direction: column; gap: 6px; padding: 5px 10px 15px; }
         .drawer-dropdown-content.show { display: flex; }
 
@@ -334,8 +330,7 @@ pointer; margin-bottom: 10px; }
             <div class="drawer-dropdown-content" id="ambassadors-dropdown"><div id="ambassadors-live-list"></div></div>
             
             <button class="drawer-accordion-btn" style="margin-top: 8px;" onclick="toggleContactDropdown()">
-
-<span><i class="fa-solid fa-comments" style="color:var(--primary); margin-left:5px;"></i>تواصل معنا الآن</span>
+                <span><i class="fa-solid fa-comments" style="color:var(--primary); margin-left:5px;"></i>تواصل معنا الآن</span>
                 <i class="fa-solid fa-chevron-down" id="contact-dropdown-icon" style="font-size: 11px;"></i>
             </button>
             <div class="drawer-dropdown-content" id="contact-dropdown">
@@ -392,7 +387,7 @@ pointer; margin-bottom: 10px; }
         <div class="section-header-title"><i class="fa-solid fa-hourglass-half"></i> ملفات خيرية نشطة بحاجة لدعمكم</div>
         <div id="cases-container"></div>
 
-<div class="section-header-title" id="archive-section-title" style="display: none;"><i class="fa-solid fa-circle-check"></i> 🌿 حصاد رأفة (ملفات كُفلت بالكامل)</div>
+        <div class="section-header-title" id="archive-section-title" style="display: none;"><i class="fa-solid fa-circle-check"></i> 🌿 حصاد رأفة (ملفات كُفلت بالكامل)</div>
         <div id="cases-archive-container"></div>
     </div>
 
@@ -441,8 +436,7 @@ pointer; margin-bottom: 10px; }
                 </div>
                 <div class="gift-names-row">
                     <div class="gift-name-tag">المهدى إليه: <span id="canvasToText">[اسم المُهدى إليه]</span></div>
-
-<div class="gift-name-tag">المُهدي: <span id="canvasFromText">[اسم المُهدي]</span></div>
+                    <div class="gift-name-tag">المُهدي: <span id="canvasFromText">[اسم المُهدي]</span></div>
                     <div class="gift-name-tag">
                         <span>المصرف الخيري لدعم الأسر المتعففة وعلاج الأطفال</span>
                     </div>
@@ -503,7 +497,7 @@ pointer; margin-bottom: 10px; }
                     <button class="btn-action" style="width: 100%;" onclick="addNewCaseLive()">🚀 نشر الحالة للجمهور</button>
                 </div>
 
-<div id="admin-sub-page-users" class="admin-sub-page">
+                <div id="admin-sub-page-users" class="admin-sub-page">
                     <div style="background: var(--card-sub-bg); padding: 14px; border-radius: 16px; margin-bottom: 15px; border: 1px solid var(--border-color); border-right: 5px solid var(--accent);">
                         <label style="font-size: 12px; font-weight: bold; color: var(--primary);">📊 التحكم بعبارة كفالة الأسر (البانر الرئيسي):</label>
                         <div style="margin-top: 8px;">
@@ -548,7 +542,7 @@ pointer; margin-bottom: 10px; }
         <div class="footer-item" onclick="toggleThemeLive()"><i class="fa-solid fa-circle-half-stroke"></i>السمة</div>
     </div>
 
-<div id="adminAuthModal" class="modal">
+    <div id="adminAuthModal" class="modal">
         <div class="modal-box" style="text-align: center;">
             <i class="fa-solid fa-shield-halved" style="font-size: 35px; color: var(--primary); margin-bottom: 12px;"></i>
             <h3 style="font-size: 15px; margin-bottom: 8px;">لوحة التحكم والمتابعة للمشرفين</h3>
@@ -601,8 +595,7 @@ pointer; margin-bottom: 10px; }
     <div id="thankYouModal" class="modal">
         <div class="modal-box" style="text-align: center; padding: 25px 20px;">
             <div style="width:50px; height:50px; background:rgba(214, 178, 53, 0.15); color:var(--accent); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 12px auto; font-size:22px;">
-
-<i class="fa-solid fa-hands-praying"></i>
+                <i class="fa-solid fa-hands-praying"></i>
             </div>
             <h3 style="font-weight: 800; color: var(--primary); margin-bottom: 6px; font-size:15px;">تقبل الله طاعاتكم ومساهمتكم ✨</h3>
             <p style="font-size: 12px; color: var(--text-sub); line-height: 1.6; margin-bottom: 16px;">
@@ -658,7 +651,7 @@ pointer; margin-bottom: 10px; }
         let familyCustomCount = "4 من 20";
         let familyCustomText = "أسرة متعففة كُفلت بالكامل 👥";
 
-const defaultCases = [
+        const defaultCases = [
             { id: 1, title: "توفير الرسوم الدراسية والجامعية للطلاب من الأسر المتعففة", target: 450000, raised: 150000, completed: false },
             { id: 2, title: "كفالة صحية وتوفير الأدوية الدورية للأمراض المزمنة وعلاج الأطفال", target: 300000, raised: 200000, completed: false }
         ];
@@ -670,8 +663,8 @@ const defaultCases = [
         const defaultAmbassadors = ["ميثاق عمر محمود"]; 
 
         function getIconForCase(title) {
-            if(title.includes('طفلة')  title.includes('علاج')  title.includes('أدوية') || title.includes('صحية')) return 'fa-solid fa-child-holding-heart';
-            if(title.includes('الرسوم')  title.includes('الدراسية')  title.includes('الجامعية')) return 'fa-solid fa-graduation-cap';
+            if(title.includes('طفلة') || title.includes('علاج') || title.includes('أدوية') || title.includes('صحية')) return 'fa-solid fa-child-holding-heart';
+            if(title.includes('الرسوم') || title.includes('الدراسية') || title.includes('الجامعية')) return 'fa-solid fa-graduation-cap';
             return 'fa-solid fa-hand-holding-heart';
         }
 
@@ -723,17 +716,16 @@ const defaultCases = [
 
         function injectQuickShareAmountLive(amount, name) {
             document.getElementById('userDonationAmount').value = amount;
-            showToastNoticeLive(تم اختيار سهم بقيمة ${amount.toLocaleString()} ج (${name}) 💎);
+            showToastNoticeLive(`تم اختيار سهم بقيمة ${amount.toLocaleString()} ج (${name}) 💎`);
         }
 
         function renderPersonalImpactBannerLive() {
-
-const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
+            const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
             const banner = document.getElementById('personal-impact-banner');
             const obj = document.getElementById('personal-impact-text');
             if(obj) {
                 if(Number(historyCount) > 0) {
-                    obj.innerText = ✨ بفضل الله، لقد ساهمتِ سابقاً في دعم ومساندة وتفريج كربات (${historyCount}) أسر في منصتنا. جزاكِ الله خيراً وضاعف أجركِ! 🌿;
+                    obj.innerText = `✨ بفضل الله، لقد ساهمتِ سابقاً في دعم ومساندة وتفريج كربات (${historyCount}) أسر في منصتنا. جزاكِ الله خيراً وضاعف أجركِ! 🌿`;
                     banner.style.display = 'flex';
                 } else { banner.style.display = 'none'; }
             }
@@ -763,8 +755,8 @@ const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
             document.querySelectorAll('.app-page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.smart-footer .footer-item').forEach(t => t.classList.remove('active'));
             
-            const selectedPage = document.getElementById(page-${pageId});
-            const selectedTab = document.getElementById(tab-${pageId});
+            const selectedPage = document.getElementById(`page-${pageId}`);
+            const selectedTab = document.getElementById(`tab-${pageId}`);
             const bodyWrapper = document.getElementById('body-wrapper');
             
             if(selectedPage) selectedPage.classList.add('active');
@@ -800,7 +792,7 @@ const historyCount = localStorage.getItem('rafa_my_impact_count') || 0;
             }
         }
 
-function toggleGiftBlessingViewLive() {
+        function toggleGiftBlessingViewLive() {
             const radioType = document.querySelector('input[name="gift-blessing-type"]:checked').value;
             const container = document.getElementById('customBlessingContainer');
             if(radioType === 'custom') {
@@ -829,12 +821,12 @@ function toggleGiftBlessingViewLive() {
             // دمج اسم الحالة الفعلي في النص المعتمد بشكل تلقائي
             const targetContainer = document.querySelector('.gift-names-row .gift-name-tag:last-child span');
             if(targetContainer) {
-                targetContainer.innerText = المصرف الخيري لمشروع: ${caseText};
+                targetContainer.innerText = `المصرف الخيري لمشروع: ${caseText}`;
             }
 
             const messageElement = document.getElementById('canvasMessageBodyText');
             if(radioType === 'ready') {
-                messageElement.innerHTML = أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع <span style="color:var(--gold-accent); font-weight:bold;">${caseText}</span>.<br><br>أسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً.;
+                messageElement.innerHTML = `أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع <span style="color:var(--gold-accent); font-weight:bold;">${caseText}</span>.<br><br>أسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً.`;
             } else {
                 messageElement.innerText = customText ? customText : "اكتب دعوتك المخصصة بالصندوق بالأعلى لتظهر هنا تلقائياً...";
             }
@@ -847,7 +839,7 @@ function toggleGiftBlessingViewLive() {
             const radioType = document.querySelector('input[name="gift-blessing-type"]:checked').value;
             const customText = document.getElementById('giftCustomTextArea').value.trim();
 
-            if(!fromInput  !toInput  !selectObj.options[selectObj.selectedIndex] || selectObj.value === "") {
+            if(!fromInput || !toInput || !selectObj.options[selectObj.selectedIndex] || selectObj.value === "") {
                 alert("⚠️ فضلاً، أدخلي أسماء المُهدي والمُهدى إليه مع اختيار حالة جارية لتجهيز نموذج الإهداء.");
                 return;
             }
@@ -859,19 +851,18 @@ function toggleGiftBlessingViewLive() {
 
             const caseName = selectObj.options[selectObj.selectedIndex].text;
             let currentBlessingText = (radioType === 'ready') ? 
-                أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع ${caseName}. أسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً. : customText;
+                `أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع ${caseName}. أسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً.` : customText;
 
-            let waText = 🎁 *طلب كفالة وإهداء تبرع - مبادرة رأفة الخيرية* 🕊️\n\n +
+            let waText = `🎁 *طلب كفالة وإهداء تبرع - مبادرة رأفة الخيرية* 🕊️\n\n` +
+                         `السلام عليكم ورحمة الله وبركاته،\n` +
+                         `أود إفادتكم بتقديم مساهمة كفالة وإصدار بطاقة إهداء:\n\n` +
+                         `💝 *المهدى إليه:* ${toInput}\n` +
+                         `✍️ *المُهدي:* ${fromInput}\n` +
+                         `📂 *المصرف الخيري المختار:* ${caseName}\n` +
+                         `📜 *نص الدعوة المعتمد:* ${currentBlessingText}\n\n` +
+                         `📍 مرفق لكم إشعار تطبيق بنكك لاعتماد القيد وإصدار الهدية في السجلات تلقائياً.`;
 
-السلام عليكم ورحمة الله وبركاته،\n +
-                         أود إفادتكم بتقديم مساهمة كفالة وإصدار بطاقة إهداء:\n\n +
-                         💝 *المهدى إليه:* ${toInput}\n +
-                         ✍️ *المُهدي:* ${fromInput}\n +
-                         📂 *المصرف الخيري المختار:* ${caseName}\n +
-                         📜 *نص الدعوة المعتمد:* ${currentBlessingText}\n\n +
-                         📍 مرفق لكم إشعار تطبيق بنكك لاعتماد القيد وإصدار الهدية في السجلات تلقائياً.;
-
-            const waUrl = https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)};
+            const waUrl = `https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)}`;
             
             let historyCount = Number(localStorage.getItem('rafa_my_impact_count') || 0);
             localStorage.setItem('rafa_my_impact_count', historyCount + 1);
@@ -887,7 +878,7 @@ function toggleGiftBlessingViewLive() {
             const radioType = document.querySelector('input[name="gift-blessing-type"]:checked').value;
             const customText = document.getElementById('giftCustomTextArea').value.trim();
 
-            if(!fromInput  !toInput  !selectObj.options[selectObj.selectedIndex] || selectObj.value === "") {
+            if(!fromInput || !toInput || !selectObj.options[selectObj.selectedIndex] || selectObj.value === "") {
                 alert("⚠️ يرجى كتابة الأسماء واختيار ملف خيري أولاً لتوليد نص الرسالة.");
                 return;
             }
@@ -899,14 +890,14 @@ function toggleGiftBlessingViewLive() {
 
             const caseName = selectObj.options[selectObj.selectedIndex].text;
             let mainMessageText = (radioType === 'ready') ?
-                أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع *(${caseName})* لدعم الأسر المتعففة بسد حوائج العون الطبي والغذائي.\n\nأسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً 🌿 : customText;
+                `أحببتُكِ فأردتُ إهداءكِ سهماً في مبادرة رأفة الخيرية لمشروع *(${caseName})* لدعم الأسر المتعففة بسد حوائج العون الطبي والغذائي.\n\nأسألُ الله أن يتقبلها ويبارك فيها، ويبارك في عمركِ، ويجعل التوفيق والسعادة ملازمين لخطواتكِ دائماً 🌿` : customText;
 
-            const message = 🎁 *بِطَاقَةُ إِهْدَاءٍ مِنَ القَلْب* 🕊️\n\n +
-                            إلى الغالي/ة: *${toInput}*\n\n +
-                            ${mainMessageText}\n\n +
-                            📂 *المصرف الخيري:* لدعم الأسر المتعففة وعلاج الأطفال\n\n +
-                            مُحبكم: *${fromInput}*\n\n +
-                            🔗 تصفح المنصة التفاعلية ومتابعة التقارير:\n${window.location.href};
+            const message = `🎁 *بِطَاقَةُ إِهْدَاءٍ مِنَ القَلْب* 🕊️\n\n` +
+                            `إلى الغالي/ة: *${toInput}*\n\n` +
+                            `${mainMessageText}\n\n` +
+                            `📂 *المصرف الخيري:* لدعم الأسر المتعففة وعلاج الأطفال\n\n` +
+                            `مُحبكم: *${fromInput}*\n\n` +
+                            `🔗 تصفح المنصة التفاعلية ومتابعة التقارير:\n${window.location.href}`;
 
             navigator.clipboard.writeText(message).then(() => {
                 showToastNoticeLive("📋 تم نسخ رسالة الإهداء النصية! أرسليها له مع صورة لقطة الشاشة 🌟");
@@ -916,8 +907,8 @@ function toggleGiftBlessingViewLive() {
         function switchAdminSubTab(subTabId) {
             document.querySelectorAll('.admin-sub-page').forEach(p => p.classList.remove('active'));
             document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(admin-sub-page-${subTabId}).classList.add('active');
-            document.getElementById(tab-sub-${subTabId}).classList.add('active');
+            document.getElementById(`admin-sub-page-${subTabId}`).classList.add('active');
+            document.getElementById(`tab-sub-${subTabId}`).classList.add('active');
         }
 
         function toggleDrawer(open) {
@@ -930,7 +921,7 @@ function toggleGiftBlessingViewLive() {
         function toggleAmbassadorsDropdown() { document.getElementById('ambassadors-dropdown').classList.toggle('show'); }
         function toggleContactDropdown() { document.getElementById('contact-dropdown').classList.toggle('show'); }
 
-function openAdminLockModal() {
+        function openAdminLockModal() {
             toggleDrawer(false);
             document.getElementById('adminPassInput').value = '';
             document.getElementById('adminAuthModal').style.display = 'flex';
@@ -962,9 +953,9 @@ function openAdminLockModal() {
             if(document.getElementById('global-collected-text')) document.getElementById('global-collected-text').innerText = totalRaised.toLocaleString() + " ج";
             if(document.getElementById('global-target-text')) document.getElementById('global-target-text').innerText = totalTarget.toLocaleString() + " ج";
             if(document.getElementById('global-live-bar')) document.getElementById('global-live-bar').style.width = globalPct + "%";
-            if(document.getElementById('global-pct-text')) document.getElementById('global-pct-text').innerText = ${globalPct}%;
+            if(document.getElementById('global-pct-text')) document.getElementById('global-pct-text').innerText = `${globalPct}%`;
             
-            if(document.getElementById('families-raised-count')) document.getElementById('families-raised-count').innerText = ${familyCustomCount} ${familyCustomText};
+            if(document.getElementById('families-raised-count')) document.getElementById('families-raised-count').innerText = `${familyCustomCount} ${familyCustomText}`;
 
             const container = document.getElementById('cases-container');
             const archiveContainer = document.getElementById('cases-archive-container');
@@ -997,8 +988,7 @@ function openAdminLockModal() {
                                 <div class="progress-container-ui">
                                     <div class="progress-labels-ui">
                                         <span style="color:var(--text-sub);">نسبة الدعم والوصول</span>
-
-<span style="color:var(--primary); font-size:13px; font-weight:800;">${pct}%</span>
+                                        <span style="color:var(--primary); font-size:13px; font-weight:800;">${pct}%</span>
                                     </div>
                                     <div class="luxury-bar-outer"><div class="luxury-bar-inner individual-inner-bar" data-pct="${pct}" style="width: 0%;"></div></div>
                                 </div>
@@ -1008,16 +998,16 @@ function openAdminLockModal() {
                                     <div class="stat-item-ui" style="text-align: left;"><span class="label">المبلغ الكلي</span><span class="value" style="color:var(--text-main);">${c.target.toLocaleString()} ج</span></div>
                                 </div>
                                 <button class="btn-luxury-action" onclick="openDonationModal(${index})">ساهم في تفريج كربتهم <i class="fa-solid fa-arrow-left"></i></button>
-                            </div>;
+                            </div>`;
                     }
                     
                     if(giftSelect) {
-                        giftSelect.innerHTML += <option value="${index}">ملف: ${c.title}</option>;
+                        giftSelect.innerHTML += `<option value="${index}">ملف: ${c.title}</option>`;
                     }
                 } else {
                     archiveCount++;
                     if(archiveContainer) {
-                        archiveContainer.innerHTML += 
+                        archiveContainer.innerHTML += `
                             <div class="luxury-card" style="opacity: 0.95; border-right: 5px solid #10b981;">
                                 <div class="card-header-ui">
                                     <div class="case-icon-wrapper">
@@ -1032,27 +1022,27 @@ function openAdminLockModal() {
                                     <div class="stat-item-ui" style="text-align: left;"><span class="label">الحالة</span><span class="value" style="font-size:12px; color:#065f46; font-weight:700;">اكتملت وتم التسليم 🌿</span></div>
                                 </div>
                                 <button class="btn-luxury-action btn-completed-shimmer"><i class="fa-solid fa-circle-check"></i> اكتملت الحالة جزاكم الله خيراً</button>
-                            </div>;
+                            </div>`;
                     }
                 }
             });
 
             if(activeCount === 0 && container) {
-                container.innerHTML = <p style="text-align:center; color:var(--text-sub); padding:30px; font-size:13px;">لا توجد حالات جارية حالياً، انتظرونا قريباً ✨</p>;
-                if(giftSelect) giftSelect.innerHTML = <option value="">لا توجد ملفات جارية حالياً</option>`;
+                container.innerHTML = `<p style="text-align:center; color:var(--text-sub); padding:30px; font-size:13px;">لا توجد حالات جارية حالياً، انتظرونا قريباً ✨</p>`;
+                if(giftSelect) giftSelect.innerHTML = `<option value="">لا توجد ملفات جارية حالياً</option>`;
             }
             if(document.getElementById('archive-section-title')) {
                 document.getElementById('archive-section-title').style.display = archiveCount > 0 ? 'flex' : 'none';
             }
 
-const sharesBtnContainer = document.getElementById('live-shares-buttons-container');
+            const sharesBtnContainer = document.getElementById('live-shares-buttons-container');
             if(sharesBtnContainer) {
                 sharesBtnContainer.innerHTML = '';
                 donationSharesData.forEach(share => {
-                    sharesBtnContainer.innerHTML += 
+                    sharesBtnContainer.innerHTML += `
                         <button class="btn-share-quick" onclick="injectQuickShareAmountLive(${share.amount}, '${share.name}')">
                             ${share.name}<br><b>${share.amount.toLocaleString()} ج</b>
-                        </button>;
+                        </button>`;
                 });
             }
 
@@ -1060,11 +1050,11 @@ const sharesBtnContainer = document.getElementById('live-shares-buttons-containe
             if(adminSharesList) {
                 adminSharesList.innerHTML = '';
                 donationSharesData.forEach((share, idx) => {
-                    adminSharesList.innerHTML += 
+                    adminSharesList.innerHTML += `
                         <div class="admin-amb-row">
                             <span>💎 ${share.name} (${share.amount.toLocaleString()} ج)</span>
                             <button class="btn-action" style="background:#ef4444; padding:2px 8px; font-size:11px;" onclick="deleteDonationShareLive(${idx})">❌ حذف</button>
-                        </div>;
+                        </div>`;
                 });
             }
 
@@ -1072,7 +1062,7 @@ const sharesBtnContainer = document.getElementById('live-shares-buttons-containe
             if(tableBody) {
                 tableBody.innerHTML = '';
                 casesData.forEach((c, index) => {
-                    tableBody.innerHTML += 
+                    tableBody.innerHTML += `
                         <tr>
                             <td style="font-weight:600; line-height:1.4; max-width:130px;">${c.title}</td>
                             <td style="font-size:11px; font-weight:700; white-space:nowrap;">${c.raised.toLocaleString()}<br><span style="color:var(--text-sub); font-weight:400;">من</span> ${c.target.toLocaleString()}</td>
@@ -1082,7 +1072,7 @@ const sharesBtnContainer = document.getElementById('live-shares-buttons-containe
                                 <button class="btn-table-action complete" title="أرشفة واكتمال" onclick="markCaseCompletedLive(${index})"><i class="fa-solid fa-check"></i></button>
                                 <button class="btn-table-action delete" title="حذف" onclick="deleteCaseLive(${index})"><i class="fa-solid fa-trash-can"></i></button>
                             </td>
-                        </tr>;
+                        </tr>`;
                 });
             }
 
@@ -1091,12 +1081,12 @@ const sharesBtnContainer = document.getElementById('live-shares-buttons-containe
             if(publicDrawerList && adminList) {
                 publicDrawerList.innerHTML = ''; adminList.innerHTML = '';
                 ambassadorsData.forEach((name, idx) => {
-                    publicDrawerList.innerHTML += <div class="amb-badge"><i class="fa-solid fa-user-check" style="color:var(--primary);"></i> ${name}</div>;
-                    adminList.innerHTML += 
+                    publicDrawerList.innerHTML += `<div class="amb-badge"><i class="fa-solid fa-user-check" style="color:var(--primary);"></i> ${name}</div>`;
+                    adminList.innerHTML += `
                         <div class="admin-amb-row">
                             <span>👤 ${name}</span>
                             <button class="btn-action" style="background:#ef4444; padding:2px 8px; font-size:11px;" onclick="deleteAmbassadorLive(${idx})">❌</button>
-                        </div>;
+                        </div>`;
                 });
             }
             
@@ -1105,8 +1095,7 @@ const sharesBtnContainer = document.getElementById('live-shares-buttons-containe
 
         function saveCustomFamilyConfigLive() {
             const countInput = document.getElementById('adminFamilyCustomCount').value.trim();
-
-const textInput = document.getElementById('adminFamilyCustomText').value.trim();
+            const textInput = document.getElementById('adminFamilyCustomText').value.trim();
             if(!countInput || !textInput) { alert("⚠️ فضلاً، الحقول لا يمكن أن تكون فارغة."); return; }
             familyCustomCount = countInput; familyCustomText = textInput;
             syncStorage(); renderComponents();
@@ -1115,7 +1104,7 @@ const textInput = document.getElementById('adminFamilyCustomText').value.trim();
 
         function openQuickCashModalLive(index) {
             document.getElementById('quickCashCaseIndex').value = index;
-            document.getElementById('quickCashTitleLabel').innerText = الملف: ${casesData[index].title};
+            document.getElementById('quickCashTitleLabel').innerText = `الملف: ${casesData[index].title}`;
             document.getElementById('quickCashAmountInput').value = '';
             document.getElementById('quickCashModal').style.display = 'flex';
         }
@@ -1131,7 +1120,7 @@ const textInput = document.getElementById('adminFamilyCustomText').value.trim();
                 casesData[idx].raised = casesData[idx].target;
                 casesData[idx].completed = true;
                 showToastNoticeLive("تم اكتمال ملف الحالة تلقائياً ونقله للحصاد! 🎉");
-            } else { showToastNoticeLive(تمت إضافة ${cashAmount.toLocaleString()} ج للملف بنجاح وتحديث النسب! 🌿); }
+            } else { showToastNoticeLive(`تمت إضافة ${cashAmount.toLocaleString()} ج للملف بنجاح وتحديث النسب! 🌿`); }
             syncStorage(); renderComponents(); closeQuickCashModal();
         }
 
@@ -1159,25 +1148,25 @@ const textInput = document.getElementById('adminFamilyCustomText').value.trim();
             let globalPct = totalTarget > 0 ? Math.round((totalRaised / totalTarget) * 100) : 0;
             let activeCases = casesData.filter(c => !c.completed);
 
-            let report = 📊 *تقرير الموقف الحالي - مبادرة رأفة الخيرية* 🌿\n\n +
-                         • المستهدف الكلي: ${totalTarget.toLocaleString()} ج\n +
-                         • المجموع المستلم: ${totalRaised.toLocaleString()} ج (${globalPct}%)\n +
-                         • الإحصائية الحالية: ${familyCustomCount} ${familyCustomText}\n\n +
-                         📝 *موقف الحالات الجارية:* \n;
+            let report = `📊 *تقرير الموقف الحالي - مبادرة رأفة الخيرية* 🌿\n\n` +
+                         `• المستهدف الكلي: ${totalTarget.toLocaleString()} ج\n` +
+                         `• المجموع المستلم: ${totalRaised.toLocaleString()} ج (${globalPct}%)\n` +
+                         `• الإحصائية الحالية: ${familyCustomCount} ${familyCustomText}\n\n` +
+                         `📝 *موقف الحالات الجارية:* \n`;
 
             activeCases.forEach((c, idx) => {
                 let pct = Math.round((c.raised / c.target) * 100);
-                report += ${idx + 1}. *${c.title}*\n   - تم جمع: ${c.raised.toLocaleString()} ج من ${c.target.toLocaleString()} ج (${pct}%)\n;
+                report += `${idx + 1}. *${c.title}*\n   - تم جمع: ${c.raised.toLocaleString()} ج من ${c.target.toLocaleString()} ج (${pct}%)\n`;
             });
 
-            report += \n💳 *حساب التحويل بنكك:* 5270255\n👤 *باسم:* ميثاق عمر محمود\n\nجزاكم الله خيراً؛;
+            report += `\n💳 *حساب التحويل بنكك:* 5270255\n👤 *باسم:* ميثاق عمر محمود\n\nجزاكم الله خيراً؛`;
             navigator.clipboard.writeText(report).then(() => { alert("📋 تم نسخ التقرير المالي بنجاح لقروبات الواتساب!"); });
         }
 
-function openDonationModal(index) {
+        function openDonationModal(index) {
             activeCaseIndexForDonation = index;
             document.getElementById('userDonationAmount').value = ''; 
-            document.getElementById('donationModalTitle').innerText = تقديم مساهمة لـ:\n ${casesData[index].title};
+            document.getElementById('donationModalTitle').innerText = `تقديم مساهمة لـ:\n ${casesData[index].title}`;
             document.getElementById('donationModal').style.display = 'flex';
         }
 
@@ -1188,15 +1177,15 @@ function openDonationModal(index) {
 
             const selectedCase = casesData[activeCaseIndexForDonation];
 
-            let waText = ✨ *إشعار مساهمة جديدة - مبادرة رأفة الخيرية* ✨\n\n +
-                         السلام عليكم ورحمة الله وبركاته،\n +
-                         أود إفادتكم بأني قمت بتقديم دعم مالي للمبادرة كالتالي:\n\n +
-                         📂 *الملف الخيري:* ${selectedCase.title}\n +
-                         💰 *قيمة المساهمة:* ${amt.toLocaleString()} جنيه سوداني\n +
-                         \n📍 مرفق لكم إشعار التحويل البنكي الرسمي من تطبيق بنكك للتأكيد.\n\n +
-                         جزاكم الله خيراً؛;
+            let waText = `✨ *إشعار مساهمة جديدة - مبادرة رأفة الخيرية* ✨\n\n` +
+                         `السلام عليكم ورحمة الله وبركاته،\n` +
+                         `أود إفادتكم بأني قمت بتقديم دعم مالي للمبادرة كالتالي:\n\n` +
+                         `📂 *الملف الخيري:* ${selectedCase.title}\n` +
+                         `💰 *قيمة المساهمة:* ${amt.toLocaleString()} جنيه سوداني\n` +
+                         `\n📍 مرفق لكم إشعار التحويل البنكي الرسمي من تطبيق بنكك للتأكيد.\n\n` +
+                         `جزاكم الله خيراً؛`;
 
-            const waUrl = https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)};
+            const waUrl = `https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(waText)}`;
             
             let historyCount = Number(localStorage.getItem('rafa_my_impact_count') || 0);
             localStorage.setItem('rafa_my_impact_count', historyCount + 1);
@@ -1210,13 +1199,13 @@ function openDonationModal(index) {
         function closeThankYouModal() { document.getElementById('thankYouModal').style.display = 'none'; renderPersonalImpactBannerLive(); }
         
         function copyAppUrlToShareLive() {
-            const currentActiveCasesNames = casesData.filter(c => !c.completed).map(c => • ${c.title}).join('\n');
-            const shareText = 🕊️ *مبادرة رأفة الخيرية | كفالة الأسر المتعففة* 🌿\n\n +
-                              ندعوكم للمساهمة معنا في سد حوائج العون الطبي والغذائي والدراسي للأسر المتعففة وعلاج الأطفال.\n\n +
-                              📌 *من ملفاتنا النشطة حالياً بحاجة لدعمكم:*\n${currentActiveCasesNames}\n\n +
-                              👥 الإحصائية الحالية المنجزة: (${familyCustomCount} ${familyCustomText}) بفضل الله ثم بدعمكم.\n\n +
-                              🔗 تصفحوا المنصة التفاعلية كاملة وتابعوا الموقف المالي بشفافية مباشرة من هنا:\n${window.location.href}\n\n +
-                              الدال على الخير كفاعله، شاركونا الأجر بالنشر والمساندة ✨;
+            const currentActiveCasesNames = casesData.filter(c => !c.completed).map(c => `• ${c.title}`).join('\n');
+            const shareText = `🕊️ *مبادرة رأفة الخيرية | كفالة الأسر المتعففة* 🌿\n\n` +
+                              `ندعوكم للمساهمة معنا في سد حوائج العون الطبي والغذائي والدراسي للأسر المتعففة وعلاج الأطفال.\n\n` +
+                              `📌 *من ملفاتنا النشطة حالياً بحاجة لدعمكم:*\n${currentActiveCasesNames}\n\n` +
+                              `👥 الإحصائية الحالية المنجزة: (${familyCustomCount} ${familyCustomText}) بفضل الله ثم بدعمكم.\n\n` +
+                              `🔗 تصفحوا المنصة التفاعلية كاملة وتابعوا الموقف المالي بشفافية مباشرة من هنا:\n${window.location.href}\n\n` +
+                              `الدال على الخير كفاعله، شاركونا الأجر بالنشر والمساندة ✨`;
 
             navigator.clipboard.writeText(shareText).then(() => {
                 alert("📋 تم نسخ رسالة المشاركة الترويجية المنسقة بنجاح وجاهزة للنشر فوراً!");
@@ -1245,10 +1234,10 @@ function openDonationModal(index) {
             }
         }
 
-function closeEditModal() { document.getElementById('editCaseModal').style.display = 'none'; }
+        function closeEditModal() { document.getElementById('editCaseModal').style.display = 'none'; }
 
         function markCaseCompletedLive(index) {
-            if(confirm(هل تريدين نقل ملف "${casesData[index].title}" إلى أرشيف الحصاد المكتمل كُلياً؟)) {
+            if(confirm(`هل تريدين نقل ملف "${casesData[index].title}" إلى أرشيف الحصاد المكتمل كُلياً؟`)) {
                 casesData[index].raised = casesData[index].target;
                 casesData[index].completed = true;
                 syncStorage(); renderComponents();
@@ -1256,7 +1245,7 @@ function closeEditModal() { document.getElementById('editCaseModal').style.displ
         }
 
         function deleteCaseLive(index) {
-            if(confirm(حذف هذه الحالة نهائياً؟)) { casesData.splice(index, 1); syncStorage(); renderComponents(); }
+            if(confirm(`حذف هذه الحالة نهائياً؟`)) { casesData.splice(index, 1); syncStorage(); renderComponents(); }
         }
 
         function addNewCaseLive() {
@@ -1279,7 +1268,7 @@ function closeEditModal() { document.getElementById('editCaseModal').style.displ
         }
 
         function deleteAmbassadorLive(idx) {
-            if(confirm(حذف "${ambassadorsData[idx]}"？)) { ambassadorsData.splice(idx, 1); syncStorage(); renderComponents(); }
+            if(confirm(`حذف "${ambassadorsData[idx]}"？`)) { ambassadorsData.splice(idx, 1); syncStorage(); renderComponents(); }
         }
 
         function openVolunteerModal() { document.getElementById('volunteerModal').style.display = 'flex'; }
@@ -1289,9 +1278,9 @@ function closeEditModal() { document.getElementById('editCaseModal').style.displ
             const name = document.getElementById('vName').value.trim();
             const gender = document.getElementById('vGender').value;
             const phone = document.getElementById('vPhone').value.trim();
-            if(name.split(/\s+/).length < 3  !gender  !phone) { alert("⚠️ فضلاً، يرجى تعبئة كافة الحقول والاسم ثلاثي."); return; }
-            const text = طلب انضمام جديد لسفراء الخير:\nالاسم: ${name}\nالجنس: ${gender}\nالهاتف: ${phone};
-            window.open(https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(text)}, '_blank');
+            if(name.split(/\s+/).length < 3 || !gender || !phone) { alert("⚠️ فضلاً، يرجى تعبئة كافة الحقول والاسم ثلاثي."); return; }
+            const text = `طلب انضمام جديد لسفراء الخير:\nالاسم: ${name}\nالجنس: ${gender}\nالهاتف: ${phone}`;
+            window.open(`https://api.whatsapp.com/send?phone=249904284874&text=${encodeURIComponent(text)}`, '_blank');
             closeVolunteerModal();
         }
 
