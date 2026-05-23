@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+يي<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -1338,5 +1338,29 @@
 
         window.onload = initApp;
     </script>
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { getFirestore, doc, updateDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+  // إعدادات مشروعكِ الخاصة من لوحة التحكم
+  const firebaseConfig = {
+    apiKey: "AIzaSyASJEVV_oViTMKC8la2EN3v76h8h-O1mGA",
+    authDomain: "rafa-platform.firebaseapp.com",
+    projectId: "rafa-platform",
+    storageBucket: "rafa-platform.firebaseasstorage.app",
+    messagingSenderId: "68199963577",
+    appId: "1:68199963577:web:8e543992a3e997d72d1c68",
+    measurementId: "G-242ME5ZGN4"
+  };
+
+  // بدء تشغيل الخدمة
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  // جعل قاعدة البيانات متاحة لجميع الدالات الأخرى في موقعكِ
+  window.db = db;
+  window.dbDocRef = doc(db, "campaign", "رئيسي");
+</script>
+
 </body>
 </html>
